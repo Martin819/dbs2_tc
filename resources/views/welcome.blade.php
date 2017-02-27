@@ -42,6 +42,9 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Zákazníci</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Kontakt</a>
+            </li>
           </ul>
         </div>
       </nav>
