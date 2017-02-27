@@ -6,3 +6,15 @@ body {
 .navbar {
     margin-bottom: 20px;
 }
+
+.nav-item {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.jumbotron {
+	padding-top: 20px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
