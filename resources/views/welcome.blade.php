@@ -49,7 +49,7 @@
         </div>
       </nav>
 
-      <div class="container-fluid">
+      <div class="jumbotron">
 
           <table class="table table-hover">
             <thead class="thead-default">
