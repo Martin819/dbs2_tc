@@ -16,6 +16,10 @@ body {
 	background-color: white;
 }
 
+.login_container {
+	width: 350px;
+}
+
 .borderless td, .borderless th {
     border: none;
 }
