@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOfficesTable extends Migration
+class CreateDepartmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateOfficesTable extends Migration
      */
     public function up()
     {
-        Schema::create('offices', function (Blueprint $table) {
-            $table->integer('BID');
-            $table->string('name', 40);
+        Schema::create('departments', function (Blueprint $table) {
+            $table->increments('DID');
+            $table->string('name', 50);
+            $table->integer('officeID');
         });
     }
 
@@ -26,6 +27,6 @@ class CreateOfficesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offices');
+        Schema::dropIfExists('departments');
     }
 }

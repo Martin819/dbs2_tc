@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOfficesTable extends Migration
+class CreateBuslinesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateOfficesTable extends Migration
      */
     public function up()
     {
-        Schema::create('offices', function (Blueprint $table) {
-            $table->integer('BID');
-            $table->string('name', 40);
+        Schema::create('buslines', function (Blueprint $table) {
+            $table->increments('LID');
+            $table->string('lineNr', 5);
         });
     }
 
@@ -26,6 +26,6 @@ class CreateOfficesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offices');
+        Schema::dropIfExists('buslines');
     }
 }
