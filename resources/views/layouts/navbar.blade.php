@@ -1,3 +1,5 @@
+
+
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -21,5 +23,15 @@
         <a class="nav-link" href="#">Zákazníci</a>
       </li>
     </ul>
+
+    @if(Auth::check())
+      <div class="ml-auto">
+        <a class="nav-link" style="color:white;" href="/logout">{{ Auth::user()->name }}</a>
+      </div>
+    @else
+      <div class="ml-auto">
+        <a class="nav-link" style="color:white;" href="/login">Přihlásit se</a>
+      </div>
+    @endif
   </div>
 </nav>

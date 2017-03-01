@@ -18,8 +18,13 @@ body {
 
 .login_container {
 	width: 350px;
+	margin-left: 55px;
 }
 
 .borderless td, .borderless th {
     border: none;
+}
+
+.welcome_logo {
+	width: 500px;
 }
