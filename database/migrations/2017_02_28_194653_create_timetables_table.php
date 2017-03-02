@@ -15,11 +15,15 @@ class CreateTimetablesTable extends Migration
     {
         Schema::create('timetables', function (Blueprint $table) {
             $table->increments('TID');
-            $table->integer('busLineID');
+            $table->unsignedInteger('busLineID');
             $table->integer('dayOfWeek');
             $table->time('timeOfArrival');
-            $table->integer('busStopID');
-            $table->integer('busID');
+            $table->unsignedInteger('busStopID');
+            $table->unsignedInteger('busID');
+## INDEXES
+#            $table->index('busLineID');
+#            $table->index('busStopID');
+#            $table->index('busID');
         });
     }
 

@@ -14,8 +14,9 @@ class CreateServicemenTable extends Migration
     public function up()
     {
         Schema::create('servicemen', function (Blueprint $table) {
-            $table->integer('EID');
+            $table->unsignedInteger('EID');
             $table->integer('hourlyWage');
+            $table->primary('EID');
         });
     }
 

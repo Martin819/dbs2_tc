@@ -14,8 +14,9 @@ class CreateManagementTable extends Migration
     public function up()
     {
         Schema::create('management', function (Blueprint $table) {
-            $table->integer('EID');
+            $table->unsignedInteger('EID');
             $table->integer('annualSalary');
+            $table->primary('EID');
         });
     }
 

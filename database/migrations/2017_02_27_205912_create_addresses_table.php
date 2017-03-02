@@ -18,9 +18,12 @@ class CreateAddressesTable extends Migration
             $table->string('streetName', 40);
             $table->string('houseNr', 9);
             $table->string('city', 35);
-            $table->string('postalCode', 15);
-            $table->string('stateCode', 2);
-        });
+            $table->string('postalCode', 15)->nullable();
+            $table->string('stateCODE', 2);
+## INDEXES
+#            $table->index('stateCODE');
+
+            });
     }
 
     /**

@@ -15,11 +15,11 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('CID');
-            $table->string('firstName', 20);
-            $table->string('lastname', 25);
-            $table->string('companyName', 30);
-            $table->string('companyIdentNr', 15);
-            $table->integer('addressID');
+            $table->string('firstName', 20)->nullable();
+            $table->string('lastname', 25)->nullable();
+            $table->string('companyName', 30)->nullable();
+            $table->string('companyIdentNr', 15)->nullable();
+            $table->unsignedInteger('addressID');
         });
     }
 

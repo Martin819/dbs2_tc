@@ -18,10 +18,10 @@ class CreateContractsTable extends Migration
             $table->integer('customerID');
             $table->string('startDest', 75);
             $table->string('finalDest', 75);
-            $table->integer('distance');
+            $table->integer('distance')->nullable();
             $table->integer('type');
-            $table->double('price', 15, 2);
-            $table->integer('invoiceID');
+            $table->double('price', 15, 2)->nullable();
+            $table->unsignedInteger('invoiceID');
         });
     }
 

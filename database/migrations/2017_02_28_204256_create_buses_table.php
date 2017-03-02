@@ -14,9 +14,10 @@ class CreateBusesTable extends Migration
     public function up()
     {
         Schema::create('buses', function (Blueprint $table) {
-            $table->integer('VID');
+            $table->unsignedInteger('VID');
             $table->string('typeOfBus', 30);
             $table->integer('seats');
+            $table->primary('VID');
         });
     }
 

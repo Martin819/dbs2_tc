@@ -14,8 +14,9 @@ class CreatePersonalTable extends Migration
     public function up()
     {
         Schema::create('personal', function (Blueprint $table) {
-            $table->integer('VID');
+            $table->unsignedInteger('VID');
             $table->integer('seats');
+            $table->primary('VID');
         });
     }
 

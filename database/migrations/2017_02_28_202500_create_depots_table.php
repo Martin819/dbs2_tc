@@ -14,9 +14,10 @@ class CreateDepotsTable extends Migration
     public function up()
     {
         Schema::create('depots', function (Blueprint $table) {
-            $table->integer('BID');
+            $table->unsignedInteger('BID');
             $table->integer('capacity');
             $table->integer('type');
+            $table->primary('BID');
         });
     }
 

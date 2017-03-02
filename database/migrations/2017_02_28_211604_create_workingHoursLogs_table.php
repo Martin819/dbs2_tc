@@ -15,7 +15,7 @@ class CreateWorkingHoursLogsTable extends Migration
     {
         Schema::create('workingHoursLogs', function (Blueprint $table) {
             $table->increments('WID');
-            $table->integer('employeeID');
+            $table->unsignedInteger('employeeID');
             $table->integer('typeOfAction');
             $table->date('dateOfAction');
             $table->time('timeOfAction');

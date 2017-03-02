@@ -17,6 +17,7 @@ class CreateStatecodesTable extends Migration
             $table->string('CODE', 2);
             $table->string('stateEnglish', 45);
             $table->string('stateCzech', 65);
+            $table->primary('CODE');
         });
     }
 

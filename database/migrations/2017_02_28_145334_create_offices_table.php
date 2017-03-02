@@ -14,8 +14,9 @@ class CreateOfficesTable extends Migration
     public function up()
     {
         Schema::create('offices', function (Blueprint $table) {
-            $table->integer('BID');
+            $table->unsignedInteger('BID');
             $table->string('name', 40);
+            $table->primary('BID');
         });
     }
 

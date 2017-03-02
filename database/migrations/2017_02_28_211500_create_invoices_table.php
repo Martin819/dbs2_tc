@@ -15,8 +15,8 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->increments('IID');
-            $table->integer('customerID');
-            $table->integer('contractID');
+            $table->unsignedInteger('customerID');
+            $table->unsignedInteger('contractID');
         });
     }
 

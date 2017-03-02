@@ -14,9 +14,10 @@ class CreateDriversTable extends Migration
     public function up()
     {
         Schema::create('drivers', function (Blueprint $table) {
-            $table->integer('EID');
+            $table->unsignedInteger('EID');
             $table->integer('hourlyWage');
             $table->date('lastTraining');
+            $table->primary('EID');
         });
     }
 

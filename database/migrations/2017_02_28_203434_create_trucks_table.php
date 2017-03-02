@@ -14,8 +14,9 @@ class CreateTrucksTable extends Migration
     public function up()
     {
         Schema::create('trucks', function (Blueprint $table) {
-            $table->integer('VID');
+            $table->unsignedInteger('VID');
             $table->integer('maxLoadKilos');
+            $table->primary('VID');
         });
     }
 
