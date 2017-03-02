@@ -96,9 +96,6 @@ class AddForeignKeysToTables extends Migration
             $table->dropForeign(['busStopID']);
             $table->dropForeign(['busID']);
         });
-        Schema::table('offices', function (Blueprint $table) {
-            $table->dropForeign(['BID']);
-        });
         Schema::table('employees', function (Blueprint $table) {
             $table->dropForeign(['addressID']);
             $table->dropForeign(['branchID']);
@@ -141,7 +138,7 @@ class AddForeignKeysToTables extends Migration
             $table->dropForeign(['contractID']);
         });
         Schema::table('workingHoursLogs', function (Blueprint $table) {
-            $table->dropForeign('employeeID');
+            $table->dropForeign(['employeeID']);
         });
     }
 }
