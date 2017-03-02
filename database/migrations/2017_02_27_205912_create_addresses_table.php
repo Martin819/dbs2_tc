@@ -21,8 +21,8 @@ class CreateAddressesTable extends Migration
             $table->string('postalCode', 15)->nullable();
             $table->string('stateCODE', 2);
 ## INDEXES
-#            $table->index('stateCODE');
-
+            $table->index('city');
+            $table->index('stateCODE');
             });
     }
 

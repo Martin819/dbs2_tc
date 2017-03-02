@@ -17,6 +17,9 @@ class CreateInvoicesTable extends Migration
             $table->increments('IID');
             $table->unsignedInteger('customerID');
             $table->unsignedInteger('contractID');
+## INDEXES
+            $table->index('customerID');
+            $table->index('contractID');
         });
     }
 

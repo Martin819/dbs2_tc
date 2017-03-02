@@ -21,9 +21,9 @@ class CreateTimetablesTable extends Migration
             $table->unsignedInteger('busStopID');
             $table->unsignedInteger('busID');
 ## INDEXES
-#            $table->index('busLineID');
-#            $table->index('busStopID');
-#            $table->index('busID');
+            $table->index('busLineID');
+            $table->index('busStopID');
+            $table->index('busID');
         });
     }
 

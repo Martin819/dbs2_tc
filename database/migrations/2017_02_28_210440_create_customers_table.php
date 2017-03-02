@@ -20,6 +20,9 @@ class CreateCustomersTable extends Migration
             $table->string('companyName', 30)->nullable();
             $table->string('companyIdentNr', 15)->nullable();
             $table->unsignedInteger('addressID');
+## INDEXES
+            $table->index('addressID');
+            $table->unique(['companyName', 'companyIdentNr']);
         });
     }
 
@@ -30,6 +33,9 @@ class CreateCustomersTable extends Migration
      */
     public function down()
     {
+        Schema::table('customers', function (Blueprint $table) {
+            $table->dropUnique(['companyName', 'companyIdentNr']);
+        });
         Schema::dropIfExists('customers');
     }
 }

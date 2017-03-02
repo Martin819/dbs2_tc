@@ -64,6 +64,7 @@ class AddForeignKeysToTables extends Migration
         });
         Schema::table('contracts', function (Blueprint $table) {
             $table->foreign('invoiceID')->references('IID')->on('invoices');
+            $table->foreign('customerID')->references('CID')->on('customers');
         });
         Schema::table('invoices', function (Blueprint $table) {
             $table->foreign('customerID')->references('CID')->on('customers');
@@ -132,6 +133,7 @@ class AddForeignKeysToTables extends Migration
         });
         Schema::table('contracts', function (Blueprint $table) {
             $table->dropForeign(['invoiceID']);
+            $table->dropForeign(['customerID']);
         });
         Schema::table('invoices', function (Blueprint $table) {
             $table->dropForeign(['customerID']);

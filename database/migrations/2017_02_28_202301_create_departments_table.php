@@ -17,6 +17,8 @@ class CreateDepartmentsTable extends Migration
             $table->increments('DID');
             $table->string('name', 50);
             $table->unsignedInteger('officeID');
+## INDEXES
+            $table->index('officeID');
         });
     }
 

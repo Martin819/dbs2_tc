@@ -19,6 +19,8 @@ class CreateWorkingHoursLogsTable extends Migration
             $table->integer('typeOfAction');
             $table->date('dateOfAction');
             $table->time('timeOfAction');
+## INDEXES
+            $table->index(['employeeID', 'dateOfAction']);
         });
     }
 
@@ -29,6 +31,9 @@ class CreateWorkingHoursLogsTable extends Migration
      */
     public function down()
     {
+        Schema::table('workingHoursLogs', function (Blueprint $table) {
+            $table->dropIndex(['employeeID', 'dateOfAction']);
+        });
         Schema::dropIfExists('workingHoursLogs');
     }
 }

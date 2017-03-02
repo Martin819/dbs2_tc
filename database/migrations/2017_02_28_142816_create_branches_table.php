@@ -19,8 +19,8 @@ class CreateBranchesTable extends Migration
             $table->unsignedInteger('addressID');
             $table->unsignedInteger('managerID');
 ## INDEXES
-#            $table->index('addressID');
-#            $table->index('managerID');
+            $table->index('addressID');
+            $table->index('managerID');
         });
     }
 

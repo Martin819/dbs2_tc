@@ -21,6 +21,9 @@ class CreateVehiclesTable extends Migration
             $table->string('plateNumber', 8);
             $table->integer('litresPerKilometer');
             $table->unsignedInteger('homeBranchID');
+## INDEXES
+            $table->index('homeBranchID');
+            $table->index('type');
         });
     }
 
