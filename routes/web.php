@@ -14,9 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
-Route::get('/branches', function () {
-	return view('branches/branches');
-});
+
+Route::get('/offices', 'OfficesController@index');
+
 Route::get('/employees', function () {
 	return view('employees/employees');
 });
