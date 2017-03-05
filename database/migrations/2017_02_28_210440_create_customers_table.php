@@ -17,12 +17,12 @@ class CreateCustomersTable extends Migration
             $table->increments('CID');
             $table->string('firstName', 20)->nullable();
             $table->string('lastname', 25)->nullable();
-            $table->string('companyName', 30)->nullable();
+            $table->string('companyName', 50)->nullable();
             $table->string('companyIdentNr', 15)->nullable();
             $table->unsignedInteger('addressID');
 ## INDEXES
             $table->index('addressID');
-            $table->unique(['companyName', 'companyIdentNr']);
+            $table->index(['companyName', 'companyIdentNr']);
         });
     }
 
@@ -34,7 +34,7 @@ class CreateCustomersTable extends Migration
     public function down()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->dropUnique(['companyName', 'companyIdentNr']);
+            $table->dropIndex(['companyName', 'companyIdentNr']);
         });
         Schema::dropIfExists('customers');
     }

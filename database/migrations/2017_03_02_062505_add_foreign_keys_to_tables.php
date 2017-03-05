@@ -38,6 +38,9 @@ class AddForeignKeysToTables extends Migration
         Schema::table('depots', function (Blueprint $table) {
             $table->foreign('BID')->references('BID')->on('branches');
         });
+        Schema::table('warehouses', function (Blueprint $table) {
+            $table->foreign('BID')->references('BID')->on('branches');
+        });
         Schema::table('vehicles', function (Blueprint $table) {
             $table->foreign('homeBranchID')->references('BID')->on('branches');
         });
