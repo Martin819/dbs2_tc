@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,9 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware('api')->get('/offices', function (Request $request) {
+	$offices = DB::select('select * from view_offices');
+	return Response::json($offices, 200, [], $options=JSON_UNESCAPED_UNICODE);
 });
