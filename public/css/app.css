@@ -2,6 +2,10 @@ body {
     padding-top: 50px;
 }
 
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
+
 .nav-item {
 	padding-left: 20px;
 	padding-right: 20px;

@@ -14,7 +14,7 @@
         <a class="nav-link" href="/employees">Zaměstnanci</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Vozidla</a>
+        <a class="nav-link" href="/vehicles">Vozidla</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Jízdní řády</a>

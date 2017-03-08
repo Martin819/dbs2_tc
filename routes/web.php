@@ -21,12 +21,16 @@ Route::get('/employees', function () {
 	return view('employees/employees');
 });
 
+Route::get('/vehicles', 'VehiclesController@create');
+Route::get('/vehicles/new', 'VehiclesController@new');
+Route::post('/vehicles/new', 'VehiclesController@store');
 
 Route::get('/register', 'RegistrationController@create');
 Route::post('/register', 'RegistrationController@store');
 
-Route::get('/login', 'SessionsController@create');
+Route::get('/login', 'SessionsController@create')->name('login');
 Route::post('/login', 'SessionsController@store');
 Route::get('/logout', 'SessionsController@destroy');
+
 
 

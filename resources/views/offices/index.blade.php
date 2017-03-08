@@ -19,6 +19,7 @@
 	          <th>Název</th>
 	          <th>Adresa</th>
 	          <th>Manažer</th>
+	          <th style="width:1%;"></th>
 	        </tr>
 	      </thead>
 	      <tbody>
@@ -31,10 +32,13 @@
 @section('scripts')
 	<script type="text/javascript">
 		$(document).ready(function() {
+			$('#offices_table').hide();
 			$.get('/api/offices', function(offices){ 
-					$.each(offices, function(index, value) {
-						$('#offices_table > tbody:last-child').append('<tr><td>'+value.name+'</td><td>'+value.address+'</td><td>'+value.manager+'</td></tr>');
-					});
+				$.each(offices, function(index, value) {
+					$('#offices_table > tbody:last-child')
+						.append('<tr><td>'+value.name+'</td><td>'+value.address+'</td><td>'+value.manager+'</td><td><a class="btn btn-info" href="/offices/'+value.id+'">Detail</a></td></tr>');
+				});
+				$('#offices_table').fadeIn();
 			});
 		});
 	</script>

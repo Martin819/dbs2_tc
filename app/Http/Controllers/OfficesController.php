@@ -11,6 +11,6 @@ class OfficesController extends Controller
     {
     	//$offices = DB::select('select * from view_offices');
     	//return view('offices/index', compact('offices'));
-    	return view('offices/index');
+    	return view('offices.index');
     }
 }
