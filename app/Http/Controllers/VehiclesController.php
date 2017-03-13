@@ -14,8 +14,50 @@ class VehiclesController extends Controller
 
     public function create()
     {
-    	$vehicles = DB::table('vehicles')->get();
-    	return view('vehicles.index', [$vehicles]);
+    	$branches = DB::table('view_depots')->get();
+        return view('vehicles.index', compact('branches'));
+    }
+
+    public function search()
+    {
+        $typeOfVehicle = request('selectedTypeOfVehicle');
+        $typeOfBus = request('selectedTypeOfBus');
+        if ($typeOfVehicle == 1) {
+
+            $this->validate(request(), [
+                'selectedTypeOfVehicle' => 'required'
+            ]);
+
+            if ($typeOfBus != '0') {
+                $buses = DB::table('view_buses')->where('typeOfBus', $typeOfBus)->get();
+                return ['message' => 'Search request', 'request' => request()->all(), 'response' => $buses];
+            } else {
+                $buses = DB::table('view_buses')->get();
+                return ['message' => 'Search request without bus', 'request' => request()->all(), 'response' => $buses];
+            }
+
+        } else if ($typeOfVehicle == 2) {
+
+            $this->validate(request(), [
+                'selectedTypeOfVehicle' => 'required'
+            ]);
+            $trucks = DB::table('view_trucks')->get();
+            return ['message' => 'Search request', 'request' => request()->all(), 'response' => $trucks];
+
+        } else if ($typeOfVehicle == 3) {
+
+            $this->validate(request(), [
+                'selectedTypeOfVehicle' => 'required'
+            ]);
+            $personal = DB::table('view_personal')->get();
+            return ['message' => 'Search request', 'request' => request()->all(), 'response' => $personal];
+
+        } else {
+
+            return ['message' => 'Unknown or not selected type of vehicle.', 'request_data' => request()->all()];
+
+        }
+        
     }
 
     public function new()
@@ -34,7 +76,7 @@ class VehiclesController extends Controller
                 'selectedDepot' => 'required',
                 'maker' => 'required',
                 'model' => 'required',
-                'plateNumber' => 'required|unique',
+                'plateNumber' => 'required',
                 'litresPerKilometer' => 'required',
                 'selectedTypeOfBus' => 'required',
                 'seats' => 'required'
@@ -61,7 +103,7 @@ class VehiclesController extends Controller
                 'selectedDepot' => 'required',
                 'maker' => 'required',
                 'model' => 'required',
-                'plateNumber' => 'required|unique',
+                'plateNumber' => 'required',
                 'litresPerKilometer' => 'required',
                 'maxLoad' => 'required'
             ]);
@@ -86,7 +128,7 @@ class VehiclesController extends Controller
                 'selectedDepot' => 'required',
                 'maker' => 'required',
                 'model' => 'required',
-                'plateNumber' => 'required|unique',
+                'plateNumber' => 'required',
                 'litresPerKilometer' => 'required',
                 'seats' => 'required'
             ]);

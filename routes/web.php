@@ -22,6 +22,7 @@ Route::get('/employees', function () {
 });
 
 Route::get('/vehicles', 'VehiclesController@create');
+Route::post('/vehicles', 'VehiclesController@search');
 Route::get('/vehicles/new', 'VehiclesController@new');
 Route::post('/vehicles/new', 'VehiclesController@store');
 

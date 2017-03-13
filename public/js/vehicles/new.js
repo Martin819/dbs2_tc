@@ -1,28 +1,3 @@
-// new Vue({
-
-// 	el: '#add_vehicle_old',
-
-// 	data: {
-// 		form: new Form({
-// 			maker: '',
-// 			model: '',
-// 			plateNumber: '',
-// 			litresPerKilometer: '',
-// 			homeBranchId: ''
-// 		})
-
-// 	},
-
-// 	methods: {
-// 		onSubmit() {
-// 			this.form.post('/vehicles/new')
-// 				.then(data => console.log(data))
-// 				.catch(errors => console.log(errors));
-// 		}
-// 	}
-
-// });
-
 new Vue({
 
 	el: '#add_vehicle',
