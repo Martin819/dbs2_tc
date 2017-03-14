@@ -76,6 +76,10 @@ class AddForeignKeysToTables extends Migration
         Schema::table('workingHoursLogs', function (Blueprint $table) {
             $table->foreign('employeeID')->references('EID')->on('employees');
         });
+        Schema::table('journeyLogs', function (Blueprint $table) {
+            $table->foreign('employeeID')->references('EID')->on('employees');
+            $table->foreign('vehicleID')->references('VID')->on('vehicles');
+        });
     }
     
     /**
@@ -144,6 +148,10 @@ class AddForeignKeysToTables extends Migration
         });
         Schema::table('workingHoursLogs', function (Blueprint $table) {
             $table->dropForeign(['employeeID']);
+        });
+        Schema::table('journeyLogs', function (Blueprint $table) {
+            $table->dropForeign(['employeeID']);
+            $table->dropForeign(['vehicleID']);
         });
     }
 }
