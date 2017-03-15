@@ -17,14 +17,11 @@ class CreateJourneylogsTable extends Migration
             $table->increments('JID');
             $table->unsignedInteger('employeeID');
             $table->unsignedInteger('vehicleID');
-            $table->date('dateOfStart');
-            $table->time('timeOfStart');
-            $table->date('dateOfEnd');
-            $table->time('timeOfEnd');
-            $table->time('duration');
+            $table->dateTime('dateTimeOfStart');
+            $table->dateTime('dateTimeOfEnd');
 ##INDEXES
-            $table->index(['vehicleID', 'dateOfStart']);
-            $table->index(['vehicleID', 'dateOfEnd']);
+            $table->index(['vehicleID', 'dateTimeOfStart']);
+            $table->index(['vehicleID', 'dateTimeOfEnd']);
         });
     }
 
@@ -36,8 +33,8 @@ class CreateJourneylogsTable extends Migration
     public function down()
     {
         Schema::table('journeyLogs', function (Blueprint $table) {
-            $table->dropIndex(['vehicleID', 'dateOfStart']);
-            $table->dropIndex(['vehicleID', 'dateOfEnd']);
+            $table->dropIndex(['vehicleID', 'dateTimeOfStart']);
+            $table->dropIndex(['vehicleID', 'dateTimeOfEnd']);
         });
         Schema::dropIfExists('journeylogs');
     }
