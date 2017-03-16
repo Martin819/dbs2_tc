@@ -25,6 +25,7 @@
 				<span class="small text-danger" v-if="form.errors.has('selectedTypeOfVehicle')" v-text="form.errors.get('selectedTypeOfVehicle')"></span>
 			</div>
 
+			<transition name="fade">
 			<div class="form-group" v-if="form.selectedTypeOfVehicle == 1">
 				<label for="busType">Typ autobusu:</label>
 				<select class="form-control" v-model="form.selectedTypeOfBus">
@@ -33,6 +34,7 @@
 				  </option>
 				</select>
 			</div>
+			</transition>
 
 			<div class="form-group">
 				<label for="depot">Depo:</label>
@@ -67,17 +69,21 @@
 			    <span class="small text-danger" v-if="form.errors.has('litresPerKilometer')" v-text="form.errors.get('litresPerKilometer')"></span>
 		 	</div>
 
+		 	<transition name="fade">
 		 	<div class="form-group" v-if="isSelectedBus() || isSelectedPersonal()">
 	  			<label for="seats">Počet míst:</label>
 			    <input type="text" class="form-control" id="seats" name="seats" v-model="form.seats" required>
 			    <span class="small text-danger" v-if="form.errors.has('seats')" v-text="form.errors.get('seats')"></span>
 		 	</div>
+		 	</transition>
 
+			<transition name="fade">
 		 	<div class="form-group" v-if="isSelectedTruck()">
 	  			<label for="maxLoad">Maximální náklad (kg):</label>
 			    <input type="text" class="form-control" id="maxLoad" name="maxLoad" v-model="form.maxLoad" required>
 			    <span class="small text-danger" v-if="form.errors.has('maxLoad')" v-text="form.errors.get('maxLoad')"></span>
 		 	</div>
+		 	</transition>
 
 		 	<div class="form-group">
 		 		<button type="submit" class="btn btn-primary" :disabled="isSubmitDisabled()">Přidat vozidlo</button>

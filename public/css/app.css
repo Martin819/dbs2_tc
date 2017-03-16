@@ -16,7 +16,7 @@ body {
 }
 
 .content_container {
-	/* background-color: #B9D4D3; */
+	/*background-color: #B9D4D3;*/
 	background-color: white;
 }
 
@@ -32,3 +32,14 @@ body {
 .welcome_logo {
 	width: 500px;
 }
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .75s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0
+}
+
+
+
+

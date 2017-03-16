@@ -18,6 +18,76 @@ class VehiclesController extends Controller
         return view('vehicles.index', compact('branches'));
     }
 
+    public function detail($vid)
+    {
+        $type = DB::table('vehicles')->where('VID', $vid)->value('type');
+        $journeylog = DB::table('view_journeylogs')->where('VID', $vid)->get();
+        if ($type != null) {
+            if ($type == 1) {
+                $vehicle = DB::table('view_buses')->where('VID', $vid)->get();
+                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog'));
+            } else if ($type == 2) {
+                $vehicle = DB::table('view_trucks')->where('VID', $vid)->get();
+                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog'));
+            } else if ($type == 3) {
+                $vehicle = DB::table('view_personal')->where('VID', $vid)->get();
+                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog'));
+            } else {
+                return ['message' => 'Unknown type of vehicle.'];
+            }
+        } else {
+            return ['message' => 'Vehicle not found.'];
+        }
+    }
+
+    public function edit()
+    {
+        $typeOfVehicle = request('typeOfVehicle');
+        $typeOfBus = request('typeOfBus');
+
+        if ($typeOfVehicle == 1 || $typeOfVehicle == 2 || $typeOfVehicle == 3) {
+
+            DB::table('vehicles')->where('vid', request('vid'))->update([
+                'maker' => request('maker'),
+                'model' => request('model'),
+                'plateNumber' => request('plateNumber'),
+                'litresPerKilometer' => request('litresPerKilometer')
+            ]);
+
+        }
+        
+        if ($typeOfVehicle == 1) {
+
+            DB::table('buses')->where('vid', request('vid'))->update([
+                'seats' => request('seats')
+            ]);
+
+            return ['message' => 'Editing row in table for bus.', 'request' => request()->all()];
+
+        } else if ($typeOfVehicle == 2) {
+
+            DB::table('trucks')->where('vid', request('vid'))->update([
+                'maxLoadKilos' => request('maxLoadKilos')
+            ]);
+
+            return ['message' => 'Editing row in table for truck.', 'request' => request()->all()];
+
+        } else if ($typeOfVehicle == 3) {
+
+            DB::table('personal')->where('vid', request('vid'))->update([
+                'seats' => request('seats')
+            ]);
+
+            return ['message' => 'Editing row in table for personal.', 'request' => request()->all()];
+
+        } else {
+
+            return ['message' => 'Unknown type of vehicle.', 'request' => request()->all()];
+
+        }
+        
+    }
+
     public function search()
     {
         $typeOfVehicle = request('selectedTypeOfVehicle');

@@ -25,6 +25,8 @@ Route::get('/vehicles', 'VehiclesController@create');
 Route::post('/vehicles', 'VehiclesController@search');
 Route::get('/vehicles/new', 'VehiclesController@new');
 Route::post('/vehicles/new', 'VehiclesController@store');
+Route::get('/vehicles/{vid}', 'VehiclesController@detail');
+Route::post('/vehicles/edit', 'VehiclesController@edit');
 
 Route::get('/register', 'RegistrationController@create');
 Route::post('/register', 'RegistrationController@store');

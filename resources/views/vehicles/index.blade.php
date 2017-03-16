@@ -24,11 +24,13 @@
 				  </option>
 				</select>
 
+				<transition name="fade">
 				<select class="form-control mb-2 mr-sm-2 mb-sm-0" v-model="form.selectedTypeOfBus" v-if="form.selectedTypeOfVehicle == 1">
 				  <option v-for="type in busTypes" :disabled="type.isDisabled">
 				    @{{ type.text }}
 				  </option>
 				</select>
+				</transition>
 
 			  <button type="submit" class="btn btn-primary mb-2 mr-sm-2 mb-sm-0" :disabled="isSubmitDisabled()">Hledat</button>
 
@@ -38,6 +40,7 @@
 
 	  		</div>
 
+	  		<transition name="fade">
 	  		<table class="table table-hover borderless" style="margin-top: 50px;" v-if="isTableVisible()">
 
 		      <thead>
@@ -67,10 +70,13 @@
 		      </tbody>
 
 		    </table>
+		    </transition>
 
+		    <transition name="fade">
 		    <div class="row justify-content-center" style="margin-top: 50px;" v-if="isLoading">
 		    	@include('layouts.activity_indicator')
-		    </div>  		
+		    </div>  
+		    </transition>		
 
 	    </div>
 	</div>

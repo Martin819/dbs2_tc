@@ -75,7 +75,7 @@ class Form {
 	}
 
 	onSuccess(data) {
-		this.reset();
+		//this.reset();
 	}
 
 	onFail(errors) {
