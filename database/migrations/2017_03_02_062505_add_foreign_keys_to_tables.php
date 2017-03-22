@@ -14,7 +14,7 @@ class AddForeignKeysToTables extends Migration
     public function up()
     {
         Schema::table('addresses', function (Blueprint $table) {
-            $table->foreign('stateCODE')->references('CODE')->on('statecodes')->onDelete('cascade')->onUpdate('restrict');
+            $table->foreign('stateCODE')->references('CODE')->on('statecodes')->onDelete('restrict')->onUpdate('cascade');
         });
         Schema::table('branches', function (Blueprint $table) {
             $table->foreign('addressID')->references('AID')->on('addresses')->onDelete('set null')->onUpdate('cascade');
