@@ -17,13 +17,11 @@ class CreateEmployeesTable extends Migration
             $table->increments('EID');
             $table->string('firstName', 20);
             $table->string('lastName', 25);
-            $table->unsignedInteger('addressID');
+            $table->unsignedInteger('addressID')->nullable();
             $table->string('position', 40)->nullable();
-            $table->unsignedInteger('branchID');
             $table->date('dateHired')->nullable();
 ##INDEXES
             $table->index('addressID');
-            $table->index('branchID');
             $table->index('position');
         });
     }

@@ -19,7 +19,7 @@ class CreateTimetablesTable extends Migration
             $table->integer('dayOfWeek');
             $table->time('timeOfArrival');
             $table->unsignedInteger('busStopID');
-            $table->unsignedInteger('busID');
+            $table->unsignedInteger('busID')->nullable();
 ## INDEXES
             $table->index('busLineID');
             $table->index('busStopID');

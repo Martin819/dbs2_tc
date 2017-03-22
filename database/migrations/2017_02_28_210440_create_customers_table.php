@@ -19,7 +19,7 @@ class CreateCustomersTable extends Migration
             $table->string('lastname', 25)->nullable();
             $table->string('companyName', 50)->nullable();
             $table->string('companyIdentNr', 15)->nullable();
-            $table->unsignedInteger('addressID');
+            $table->unsignedInteger('addressID')->nullable();
 ## INDEXES
             $table->index('addressID');
             $table->index(['companyName', 'companyIdentNr']);
