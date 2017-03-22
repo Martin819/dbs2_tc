@@ -6,6 +6,7 @@ var cd = new Vue({
 
 		companyName: this.companyName,
 		customer: this.customer[0],
+		contracts: this.contracts,
 
 		typesOfCustomers: [
 		  { text: 'Vyberte typ zákazníka', isDisabled: true },
@@ -25,11 +26,11 @@ var cd = new Vue({
 
 	computed: {
 		isPerson() {
-			return this.companyName == '' && this.companyIdentNr == '';
+			return this.form.typeOfCustomer == this.typesOfCustomers[1].text;
 		},
 
 		isCompany() {
-			return this.firstname == '' && this.lastname == '';
+			return this.form.typeOfCustomer == this.typesOfCustomers[2].text;
 		}
 	},
 
@@ -43,11 +44,47 @@ var cd = new Vue({
 				.catch(errors => console.log(errors));
 		},
 
+		fillForm() {
+			if (this.customer.companyName == '') {
+				this.form.typeOfCustomer = this.typesOfCustomers[1].text;
+				this.form.firstname = this.customer.firstName;
+				this.form.lastname = this.customer.lastname;
+			} else {
+				this.form.typeOfCustomer = this.typesOfCustomers[2].text;
+				this.form.companyName = this.customer.companyName;
+				this.form.companyIdentNr = this.customer.companyIdentNr;
+			}
+		},
+
 		printSth() {
 			console.log(this.customer);
+			console.log(this.contracts);
 		}
 	}
 
 });
 
 cd.printSth();
+cd.fillForm();
+
+var ci = new Vue({
+
+	el: '#customer_invoices',
+
+	data: {
+
+		contracts: this.contracts
+
+	},
+
+	computed: {
+		isPerson() {
+			return this.form.typeOfCustomer == this.typesOfCustomers[1].text;
+		},
+
+		isCompany() {
+			return this.form.typeOfCustomer == this.typesOfCustomers[2].text;
+		}
+	}
+
+});

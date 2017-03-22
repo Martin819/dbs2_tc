@@ -20,13 +20,14 @@ class CustomersController extends Controller
     public function detail($cid) 
     {
         $customer = DB::table('customers')->where('CID', $cid)->get();
+        $contracts = DB::table('contracts')->where('customerID', $cid)->get();
         $companyName = $customer[0]->companyName;
         if ($companyName == null) {
             $companyName = '\''. 'Fyzická osoba' . '\'';
         } else {
             $companyName = '\'' . 'Právnická osoba' . '\'';
         }
-        return view('customers.detail', compact('companyName', 'customer'));
+        return view('customers.detail', compact('companyName', 'customer', 'contracts'));
     }
 
     public function search()
