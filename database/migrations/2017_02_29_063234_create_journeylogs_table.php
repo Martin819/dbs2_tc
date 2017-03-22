@@ -15,8 +15,8 @@ class CreateJourneylogsTable extends Migration
     {
         Schema::create('journeylogs', function (Blueprint $table) {
             $table->increments('JID');
-            $table->unsignedInteger('employeeID');
-            $table->unsignedInteger('vehicleID');
+            $table->unsignedInteger('employeeID')->nullable();
+            $table->unsignedInteger('vehicleID')->nullable();
             $table->dateTime('dateTimeOfStart');
             $table->dateTime('dateTimeOfEnd');
 ##INDEXES

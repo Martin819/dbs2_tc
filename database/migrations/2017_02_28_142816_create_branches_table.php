@@ -16,7 +16,7 @@ class CreateBranchesTable extends Migration
         Schema::create('branches', function (Blueprint $table) {
             $table->increments('BID');
             $table->integer('type');
-            $table->unsignedInteger('addressID');
+            $table->unsignedInteger('addressID')->nullable();
 
 ## INDEXES
             $table->index('addressID');

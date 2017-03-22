@@ -14,75 +14,75 @@ class AddForeignKeysToTables extends Migration
     public function up()
     {
         Schema::table('addresses', function (Blueprint $table) {
-            $table->foreign('stateCODE')->references('CODE')->on('statecodes');
+            $table->foreign('stateCODE')->references('CODE')->on('statecodes')->onDelete('cascade')->onUpdate('restrict');
         });
         Schema::table('branches', function (Blueprint $table) {
-            $table->foreign('addressID')->references('AID')->on('addresses');
+            $table->foreign('addressID')->references('AID')->on('addresses')->onDelete('set null')->onUpdate('cascade');
         });
         Schema::table('offices', function (Blueprint $table) {
-            $table->foreign('BID')->references('BID')->on('branches');
+            $table->foreign('BID')->references('BID')->on('branches')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('timetables', function (Blueprint $table) {
-            $table->foreign('busLineID')->references('LID')->on('buslines');
-            $table->foreign('busStopID')->references('SID')->on('busstops');
-            $table->foreign('busID')->references('VID')->on('vehicles');
+            $table->foreign('busLineID')->references('LID')->on('buslines')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('busStopID')->references('SID')->on('busstops')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('busID')->references('VID')->on('vehicles')->onDelete('set null')->onUpdate('cascade');
         });
         Schema::table('employees', function (Blueprint $table) {
-            $table->foreign('addressID')->references('AID')->on('addresses');
+            $table->foreign('addressID')->references('AID')->on('addresses')->onDelete('set null')->onUpdate('cascade');
         });
         Schema::table('branches_employees', function (Blueprint $table) {
-            $table->foreign('employeeID')->references('EID')->on('employees');
-            $table->foreign('branchID')->references('BID')->on('branches');
+            $table->foreign('employeeID')->references('EID')->on('employees')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('branchID')->references('BID')->on('branches')->onDelete('set null')->onUpdate('cascade');
         });
         Schema::table('departments', function (Blueprint $table) {
-            $table->foreign('officeID')->references('BID')->on('offices');
+            $table->foreign('officeID')->references('BID')->on('offices')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('depots', function (Blueprint $table) {
-            $table->foreign('BID')->references('BID')->on('branches');
+            $table->foreign('BID')->references('BID')->on('branches')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('warehouses', function (Blueprint $table) {
-            $table->foreign('BID')->references('BID')->on('branches');
+            $table->foreign('BID')->references('BID')->on('branches')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('vehicles', function (Blueprint $table) {
-            $table->foreign('homeBranchID')->references('BID')->on('branches');
+            $table->foreign('homeBranchID')->references('BID')->on('branches')->onDelete('set null')->onUpdate('cascade');
         });
         Schema::table('personal', function (Blueprint $table) {
-            $table->foreign('VID')->references('VID')->on('vehicles');
+            $table->foreign('VID')->references('VID')->on('vehicles')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('trucks', function (Blueprint $table) {
-            $table->foreign('VID')->references('VID')->on('vehicles');
+            $table->foreign('VID')->references('VID')->on('vehicles')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('buses', function (Blueprint $table) {
-            $table->foreign('VID')->references('VID')->on('vehicles');
+            $table->foreign('VID')->references('VID')->on('vehicles')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('drivers', function (Blueprint $table) {
-            $table->foreign('EID')->references('EID')->on('employees');
+            $table->foreign('EID')->references('EID')->on('employees')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('servicemen', function (Blueprint $table) {
-            $table->foreign('EID')->references('EID')->on('employees');
+            $table->foreign('EID')->references('EID')->on('employees')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('management', function (Blueprint $table) {
-            $table->foreign('EID')->references('EID')->on('employees');
+            $table->foreign('EID')->references('EID')->on('employees')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('customers', function (Blueprint $table) {
-            $table->foreign('addressID')->references('AID')->on('addresses');
+            $table->foreign('addressID')->references('AID')->on('addresses')->onDelete('set null')->onUpdate('cascade');
         });
         Schema::table('contracts', function (Blueprint $table) {
-            $table->foreign('customerID')->references('CID')->on('customers');
+            $table->foreign('customerID')->references('CID')->on('customers')->onDelete('set null')->onUpdate('cascade');
         });
         Schema::table('invoices', function (Blueprint $table) {
-            $table->foreign('customerID')->references('CID')->on('customers');
+            $table->foreign('customerID')->references('CID')->on('customers')->onDelete('set null')->onUpdate('cascade');
         });
         Schema::table('contracts_invoices', function (Blueprint $table) {
-            $table->foreign('invoiceID')->references('IID')->on('invoices');
-            $table->foreign('contractID')->references('CID')->on('contracts');
+            $table->foreign('invoiceID')->references('IID')->on('invoices')->onDelete('set null')->onUpdate('cascade');
+            $table->foreign('contractID')->references('CID')->on('contracts')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('workingHoursLogs', function (Blueprint $table) {
-            $table->foreign('employeeID')->references('EID')->on('employees');
+            $table->foreign('employeeID')->references('EID')->on('employees')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('journeyLogs', function (Blueprint $table) {
-            $table->foreign('employeeID')->references('EID')->on('employees');
-            $table->foreign('vehicleID')->references('VID')->on('vehicles');
+            $table->foreign('employeeID')->references('EID')->on('employees')->onDelete('set null')->onUpdate('cascade');
+            $table->foreign('vehicleID')->references('VID')->on('vehicles')->onDelete('set null')->onUpdate('cascade');
         });
     }
     

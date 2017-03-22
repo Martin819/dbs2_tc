@@ -15,7 +15,7 @@ class CreateBranchesEmployeesTable extends Migration
     {
         Schema::create('branches_employees', function (Blueprint $table) {
             $table->increments('ID');
-            $table->unsignedInteger('branchID');
+            $table->unsignedInteger('branchID')->nullable();
             $table->unsignedInteger('employeeID');
             $table->boolean('isManager');
 ## INDEXES

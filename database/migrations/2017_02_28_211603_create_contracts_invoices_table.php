@@ -16,7 +16,7 @@ class CreateContractsInvoicesTable extends Migration
         Schema::create('contracts_invoices', function (Blueprint $table) {
             $table->increments('ID');
             $table->unsignedInteger('contractID');
-            $table->unsignedInteger('invoiceID');
+            $table->unsignedInteger('invoiceID')->nullable();
 ## INDEXES
             $table->index('contractID');
             $table->index('invoiceID');

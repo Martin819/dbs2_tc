@@ -15,7 +15,7 @@ class CreateContractsTable extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->increments('CID');
-            $table->unsignedInteger('customerID');
+            $table->unsignedInteger('customerID')->nullable();
             $table->string('startDest', 75);
             $table->string('finalDest', 75);
             $table->integer('distance')->nullable();
