@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class OfficesController extends Controller
 {
+	public function __construct()
+	{
+		$this->middleware('auth');	
+	}
+	
     public function index()
     {
     	//$offices = DB::select('select * from view_offices');

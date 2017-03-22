@@ -33,19 +33,19 @@ new Vue({
 
 	methods: {
 		isSelectedVehicleType() {
-			return this.form.selectedTypeOfVehicle > 0
+			return this.form.selectedTypeOfVehicle > 0;
 		},
 		isSelectedBus() {
-			return this.typeOfVehicle == 1
+			return this.typeOfVehicle == 1;
 		},
 		isSelectedTruck() {
-			return this.typeOfVehicle == 2
+			return this.typeOfVehicle == 2;
 		},
 		isSelectedPersonal() {
-			return this.typeOfVehicle == 3
+			return this.typeOfVehicle == 3;
 		},
 		isSelectedTram() {
-			return this.typeOfBus == 'Tramvaj'
+			return this.typeOfVehicle == 1 && this.typeOfBus == 'Tramvaj';
 		},	
 		getNameForDepot(type) {
 			if (type == 1) {

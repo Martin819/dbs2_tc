@@ -46,11 +46,6 @@ var vm = new Vue({
 			return this.form.typeOfVehicle == 1 && this.form.typeOfBus == 'Tramvaj';
 		},
 
-		printVid() {
-			console.log(this.vehicleData);
-			console.log(this.vehType);
-		},
-
 		fillForm() {
 			$vehicle = this.vehicleData;
 			this.form.typeOfVehicle = this.type;
@@ -68,29 +63,71 @@ var vm = new Vue({
 			this.isLoading = true;
 			this.form.post('/vehicles/edit')
 				.then(data => this.onSuccess(data))
-				.catch(errors => console.log(errors));
+				.catch(errors => this.onFail(errors));
 		},
 
 		onSuccess(data) {
 			this.isLoading = false;
+			alert('Vozidlo upraveno.');
 			console.log(data);
+		},
+
+		onFail(errors) {
+			this.isLoading = false;
+			alert('POZOR: Všechna pole musí být vyplněna.');
+			console.log(errors);
 		}
 	}
 
 
 });
 
-vm.printVid();
 vm.fillForm();
 
-new Vue({
+var jlogdiv = new Vue({
 
 	el: '#vehicle_journeylog',
 
 	data: {
 		
-		journeylog: this.journeylog
+		journeylog: this.journeylog,
+		from: 0,
+		to: 0,
+		delta: 20
+
+	},
+
+	computed: {
+		selectedlogs() {
+			return this.journeylog.slice(this.from, this.to);
+		},
+
+		selectionEnd() {
+			return this.journeylog.length > this.to ? this.to : this.journeylog.length;
+		}
+	},
+
+	methods: {
+		previous() {
+			this.from = this.from - this.delta;
+			this.to = this.to - this.delta;
+		},
+
+		next() {
+			this.from = this.from + this.delta;
+			this.to = this.to + this.delta;
+		},
+
+		prepare() {
+			if (this.journeylog.length > this.delta) {
+				this.to = this.delta;
+			} else {
+				this.to = journeylog.length;
+			}
+		}
 
 	}
 
 });
+
+jlogdiv.prepare();

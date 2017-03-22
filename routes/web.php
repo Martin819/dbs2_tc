@@ -28,6 +28,12 @@ Route::post('/vehicles/new', 'VehiclesController@store');
 Route::get('/vehicles/{vid}', 'VehiclesController@detail');
 Route::post('/vehicles/edit', 'VehiclesController@edit');
 
+Route::get('/timetables', 'TimetablesController@create');
+
+Route::get('/customers', 'CustomersController@create');
+Route::post('/customers', 'CustomersController@search');
+Route::get('/customers/{cid}', 'CustomersController@detail');
+
 Route::get('/register', 'RegistrationController@create');
 Route::post('/register', 'RegistrationController@store');
 

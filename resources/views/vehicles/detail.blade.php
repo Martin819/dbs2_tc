@@ -147,7 +147,7 @@
 		      </thead>
 
 		      <tbody>
-		      	<tr v-for="log in journeylog">
+		      	<tr v-for="log in selectedlogs">
 		      		<td v-text="log.start"></td>
 		      		<td v-text="log.end"></td>
 		      		<td v-text="log.employee"></td>
@@ -158,6 +158,17 @@
 		    </table>
 
 		    <label v-if="journeylog.length < 1" style="color: #BBBBBB">Pro toto vozidlo neexistují žádné záznamy.</label>
+
+		    <div class="row" v-if="journeylog.length > 0">
+		    	<div class="col-md-9">
+		    		<label v-text="'Zobrazeny záznamy od: '+from+' do: '+selectionEnd" style="color: #BBBBBB"></label>
+		    	</div>
+		    	
+		    	<div class="col-xl-3">
+		    		<button class="btn btn-primary ml-auto" :disabled="from <= 0" @click="previous">Předchozí</button>
+		    		<button class="btn btn-primary ml-auto" :disabled="to >= journeylog.length" @click="next">Následující</button>
+		    	</div>
+		    </div>
 		</div>
 	</div>
 

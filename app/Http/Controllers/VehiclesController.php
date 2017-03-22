@@ -47,16 +47,34 @@ class VehiclesController extends Controller
 
         if ($typeOfVehicle == 1 || $typeOfVehicle == 2 || $typeOfVehicle == 3) {
 
+            $this->validate(request(), [
+                'maker' => 'required',
+                'model' => 'required',
+                'litresPerKilometer' => 'required',
+            ]);
+
             DB::table('vehicles')->where('vid', request('vid'))->update([
                 'maker' => request('maker'),
                 'model' => request('model'),
-                'plateNumber' => request('plateNumber'),
                 'litresPerKilometer' => request('litresPerKilometer')
             ]);
 
         }
         
         if ($typeOfVehicle == 1) {
+
+            $this->validate(request(), [
+                'seats' => 'required'
+            ]);
+
+            if ($typeOfBus != 'Tramvaj') {
+                $this->validate(request(), [
+                    'plateNumber' => 'required'
+                ]);
+                DB::table('vehicles')->where('vid', request('vid'))->update([
+                    'plateNumber' => request('plateNumber')
+                ]);
+            }
 
             DB::table('buses')->where('vid', request('vid'))->update([
                 'seats' => request('seats')
@@ -66,6 +84,15 @@ class VehiclesController extends Controller
 
         } else if ($typeOfVehicle == 2) {
 
+            $this->validate(request(), [
+                'maxLoadKilos' => 'required',
+                'plateNumber' => 'required'
+            ]);
+
+            DB::table('vehicles')->where('vid', request('vid'))->update([
+                'plateNumber' => request('plateNumber')
+            ]);
+
             DB::table('trucks')->where('vid', request('vid'))->update([
                 'maxLoadKilos' => request('maxLoadKilos')
             ]);
@@ -73,6 +100,15 @@ class VehiclesController extends Controller
             return ['message' => 'Editing row in table for truck.', 'request' => request()->all()];
 
         } else if ($typeOfVehicle == 3) {
+
+            $this->validate(request(), [
+                'seats' => 'required',
+                'plateNumber' => 'required'
+            ]);
+
+            DB::table('vehicles')->where('vid', request('vid'))->update([
+                'plateNumber' => request('plateNumber')
+            ]);
 
             DB::table('personal')->where('vid', request('vid'))->update([
                 'seats' => request('seats')

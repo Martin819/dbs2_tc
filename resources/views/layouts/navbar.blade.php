@@ -6,32 +6,37 @@
   </button>
   <a class="navbar-brand" href="/">HOME</a>
   <div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/offices">Pobočky</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/employees">Zaměstnanci</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/vehicles">Vozidla</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Jízdní řády</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Zákazníci</a>
-      </li>
-    </ul>
 
     @if(Auth::check())
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/offices">Pobočky</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/employees">Zaměstnanci</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/vehicles">Vozidla</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/timetables">Jízdní řády</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/customers">Zákazníci</a>
+        </li>
+      </ul>
+
       <div class="ml-auto">
         <a class="nav-link" style="color:white;" href="/logout">{{ Auth::user()->name }}</a>
       </div>
+
     @else
+
       <div class="ml-auto">
         <a class="nav-link" style="color:white;" href="/login">Přihlásit se</a>
       </div>
+      
     @endif
   </div>
 </nav>
