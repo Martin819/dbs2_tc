@@ -18,7 +18,6 @@ class AddForeignKeysToTables extends Migration
         });
         Schema::table('branches', function (Blueprint $table) {
             $table->foreign('addressID')->references('AID')->on('addresses');
-            $table->foreign('managerID')->references('EID')->on('employees');
         });
         Schema::table('offices', function (Blueprint $table) {
             $table->foreign('BID')->references('BID')->on('branches');
@@ -30,6 +29,9 @@ class AddForeignKeysToTables extends Migration
         });
         Schema::table('employees', function (Blueprint $table) {
             $table->foreign('addressID')->references('AID')->on('addresses');
+        });
+        Schema::table('branches_employees', function (Blueprint $table) {
+            $table->foreign('employeeID')->references('EID')->on('employees');
             $table->foreign('branchID')->references('BID')->on('branches');
         });
         Schema::table('departments', function (Blueprint $table) {
@@ -66,11 +68,13 @@ class AddForeignKeysToTables extends Migration
             $table->foreign('addressID')->references('AID')->on('addresses');
         });
         Schema::table('contracts', function (Blueprint $table) {
-            $table->foreign('invoiceID')->references('IID')->on('invoices');
             $table->foreign('customerID')->references('CID')->on('customers');
         });
         Schema::table('invoices', function (Blueprint $table) {
             $table->foreign('customerID')->references('CID')->on('customers');
+        });
+        Schema::table('contracts_invoices', function (Blueprint $table) {
+            $table->foreign('invoiceID')->references('IID')->on('invoices');
             $table->foreign('contractID')->references('CID')->on('contracts');
         });
         Schema::table('workingHoursLogs', function (Blueprint $table) {
@@ -94,7 +98,6 @@ class AddForeignKeysToTables extends Migration
         });
         Schema::table('branches', function (Blueprint $table) {
             $table->dropForeign(['addressID']);
-            $table->dropForeign(['managerID']);
         });
         Schema::table('offices', function (Blueprint $table) {
             $table->dropForeign(['BID']);
@@ -106,6 +109,9 @@ class AddForeignKeysToTables extends Migration
         });
         Schema::table('employees', function (Blueprint $table) {
             $table->dropForeign(['addressID']);
+        });
+        Schema::table('branches_employees', function (Blueprint $table) {
+            $table->dropForeign(['employeeID']);
             $table->dropForeign(['branchID']);
         });
         Schema::table('departments', function (Blueprint $table) {
@@ -139,11 +145,13 @@ class AddForeignKeysToTables extends Migration
             $table->dropForeign(['addressID']);
         });
         Schema::table('contracts', function (Blueprint $table) {
-            $table->dropForeign(['invoiceID']);
             $table->dropForeign(['customerID']);
         });
         Schema::table('invoices', function (Blueprint $table) {
             $table->dropForeign(['customerID']);
+        });
+        Schema::table('contracts_invoices', function (Blueprint $table) {
+            $table->dropForeign(['invoiceID']);
             $table->dropForeign(['contractID']);
         });
         Schema::table('workingHoursLogs', function (Blueprint $table) {

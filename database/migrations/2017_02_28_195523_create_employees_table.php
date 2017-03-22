@@ -19,11 +19,9 @@ class CreateEmployeesTable extends Migration
             $table->string('lastName', 25);
             $table->unsignedInteger('addressID');
             $table->string('position', 40)->nullable();
-            $table->unsignedInteger('branchID');
             $table->date('dateHired')->nullable();
 ##INDEXES
             $table->index('addressID');
-            $table->index('branchID');
             $table->index('position');
         });
     }
