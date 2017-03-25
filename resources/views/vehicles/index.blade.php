@@ -32,11 +32,11 @@
 				</select>
 				</transition>
 
-			  <button type="submit" class="btn btn-primary mb-2 mr-sm-2 mb-sm-0" :disabled="isSubmitDisabled()">Hledat</button>
+			  <button type="submit" class="btn btn-primary mb-2 mr-sm-2 mb-sm-0" :disabled="isSubmitDisabled()"><img src="img/search.png" style="width:24px;height:24px;"> Hledat</button>
 
 	  		</form>	
 
-	  		<a class="btn btn-warning ml-auto" href="/vehicles/new">Přidat nové vozidlo</a>
+	  		<a class="btn btn-warning ml-auto" href="/vehicles/new"><img src="img/add.png" style="width:24px;height:24px;"> Přidat nové vozidlo</a>
 
 	  		</div>
 
@@ -65,7 +65,7 @@
 		      		<td v-if="!isSelectedTram()">@{{ vehicle.litresPerKilometer }}</td>
 		      		<td v-if="isSelectedBus() || isSelectedPersonal()">@{{ vehicle.seats }}</td>
 		      		<td v-if="isSelectedTruck()">@{{ vehicle.maxLoadKilos }}</td>
-		      		<td><a class="btn btn-info" v-bind:href="'/vehicles/' + vehicle.VID">Detail</a></td>
+		      		<td><a class="btn btn-info" v-bind:href="'/vehicles/' + vehicle.VID"><img src="img/pencil.png" style="width:24px;height:24px;"> Detail</a></td>
 		      	</tr>
 		      </tbody>
 

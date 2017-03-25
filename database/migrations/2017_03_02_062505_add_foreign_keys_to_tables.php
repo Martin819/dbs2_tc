@@ -84,6 +84,9 @@ class AddForeignKeysToTables extends Migration
             $table->foreign('employeeID')->references('EID')->on('employees')->onDelete('set null')->onUpdate('cascade');
             $table->foreign('vehicleID')->references('VID')->on('vehicles')->onDelete('set null')->onUpdate('cascade');
         });
+        Schema::table('roles', function (Blueprint $table) {
+            $table->foreign('id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+        });
     }
     
     /**
@@ -160,6 +163,9 @@ class AddForeignKeysToTables extends Migration
         Schema::table('journeyLogs', function (Blueprint $table) {
             $table->dropForeign(['employeeID']);
             $table->dropForeign(['vehicleID']);
+        });
+        Schema::table('roles', function (Blueprint $table) {
+            $table->dropForeign(['id']);
         });
     }
 }

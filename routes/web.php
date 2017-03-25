@@ -17,9 +17,7 @@ Route::get('/', function () {
 
 Route::get('/offices', 'OfficesController@index');
 
-Route::get('/employees', function () {
-	return view('employees/employees');
-});
+Route::get('/employees', 'EmployeesController@create');
 
 Route::get('/vehicles', 'VehiclesController@create');
 Route::post('/vehicles', 'VehiclesController@search');
@@ -27,6 +25,7 @@ Route::get('/vehicles/new', 'VehiclesController@new');
 Route::post('/vehicles/new', 'VehiclesController@store');
 Route::get('/vehicles/{vid}', 'VehiclesController@detail');
 Route::post('/vehicles/edit', 'VehiclesController@edit');
+Route::post('/vehicles/', 'VehiclesController@delete');
 
 Route::get('/timetables', 'TimetablesController@create');
 
@@ -36,6 +35,8 @@ Route::get('/customers/{cid}', 'CustomersController@detail');
 
 Route::get('/register', 'RegistrationController@create');
 Route::post('/register', 'RegistrationController@store');
+Route::get('/pass', 'RegistrationController@createpass');
+Route::post('/pass', 'RegistrationController@storepass');
 
 Route::get('/login', 'SessionsController@create')->name('login');
 Route::post('/login', 'SessionsController@store');

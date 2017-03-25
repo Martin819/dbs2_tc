@@ -30,4 +30,25 @@ class RegistrationController extends Controller
         auth()->login($user);
     	return redirect()->home();
     }
+
+    public function createpass()
+    {
+        return view('registration.createpass');
+    }
+
+        public function storepass()
+    {
+        $this->validate(request(), [
+            'email' => 'required|email',
+            'password' => 'required|confirmed'
+        ]);
+
+        $email = request()->input('email');
+        $password = Hash::make(request()->input('password'));
+
+        User::where('email', $email)->update(array('password' => Hash::make($password)));
+
+/*        auth()->login($user); */
+        return redirect()->home();
+    }
 }
