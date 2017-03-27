@@ -108,7 +108,7 @@
 				<div class="row" style="margin-right: 0px;">
 					
 					<div class="col-md-1">
-						<button type="submit" class="btn btn-primary" :disabled="isLoading">Uložit</button>
+						<button type="submit" class="btn btn-primary" :disabled="isLoading"><img src="../img/save.png" style="width:24px;height:24px;"> Uložit</button>
 					</div>
 
 					
@@ -119,9 +119,7 @@
 							</transition>
 						</div>
 					</div>
-
-					<a v-bind:class="[ isLoading ? 'disabled' : '', 'btn',  'btn-danger', 'ml-auto' ]" href="#">Smazat vozidlo</a>
-
+					<a class="btn btn-danger" href="#" v-on:click="del()"><img src="../img/delete.png" style="width:24px;height:24px;"> Smazat</a>
 				</div>
 			</form>	
 		</div>

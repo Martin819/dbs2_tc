@@ -263,6 +263,7 @@ class VehiclesController extends Controller
     public function delete()
     {
         DB::table('vehicles')->where('vid', request('vid'))->delete();
+        return ['Message' => 'Delete request', 'Request' => request('vid')];
     }
 
 }

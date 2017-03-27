@@ -25,8 +25,8 @@
 				<span class="small text-danger" v-if="form.errors.has('selectedTypeOfVehicle')" v-text="form.errors.get('selectedTypeOfVehicle')"></span>
 			</div>
 
-			<transition name="fade">
-			<div class="form-group" v-if="form.selectedTypeOfVehicle == 1">
+			<transition name="slide-fade">
+			<div class="form-group" v-show="form.selectedTypeOfVehicle == 1">
 				<label for="busType">Typ autobusu:</label>
 				<select class="form-control" v-model="form.selectedTypeOfBus">
 				  <option v-for="type in busTypes" :disabled="type.isDisabled">

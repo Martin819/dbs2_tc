@@ -12,14 +12,14 @@
   </div>
 
   <div class="jumbotron content_container">
-    <div class="container" id="search_vehicle">
+    <div class="container" id="search_employee">
 
       <div class="row" style="margin-left: 0px; margin-right: 0px;">
 
         <a class="btn btn-warning ml-auto" href="/employees/new"><img src="img/add.png" style="width:24px;height:24px;"> Přidat nového zamestnance</a>
 
         </div>
-        <table class="table table-hover borderless" style="margin-top: 50px;" v-if="isTableVisible()">
+        <table class="table table-hover borderless" style="margin-top: 50px;">
 
           <thead>
             <tr>

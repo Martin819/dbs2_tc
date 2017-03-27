@@ -76,6 +76,19 @@ var vm = new Vue({
 			this.isLoading = false;
 			alert('POZOR: Všechna pole musí být vyplněna.');
 			console.log(errors);
+		},
+
+		del(){
+			axios.post('/vehicles/delete', {
+				'vid': this.form.vid
+			})
+			.then(function (response){
+				console.log(response);
+				window.location.href='/vehicles';
+			})
+			.catch(function(error){
+				console.log(error);
+			})
 		}
 	}
 

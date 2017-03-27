@@ -25,7 +25,7 @@ Route::get('/vehicles/new', 'VehiclesController@new');
 Route::post('/vehicles/new', 'VehiclesController@store');
 Route::get('/vehicles/{vid}', 'VehiclesController@detail');
 Route::post('/vehicles/edit', 'VehiclesController@edit');
-Route::post('/vehicles/', 'VehiclesController@delete');
+Route::post('/vehicles/delete', 'VehiclesController@delete');
 
 Route::get('/timetables', 'TimetablesController@create');
 
