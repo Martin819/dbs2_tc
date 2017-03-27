@@ -3,14 +3,43 @@ new Vue({
 	el: '#search_employee',
 
 	data: {
-	    position: '0',
+
+		branches: this.fetchedBranches
+
+		employeePositions: [
+		  { text: 'Vyberte pozici' , value: '0', isDisabled: true },
+	      { text: 'Ridic(ka)', value: '1', isDisabled: false },
+	      { text: 'Zamestnanec servisu', value: '2', isDisabled: false },
+	      { text: 'Management', value: '3', isDisabled: false }
+	      { text: 'Ostatni', value: '4', isDisabled: false }
+	    ],
+
+	    form: new Form({
+	    	selectedPosition: '0',
+	    }),
+
+	    position: "",
 	    fetchedEmployees: [],
 	    isLoading: false
 	},
 
 	methods: {
-/*		
-		getNameForDepot(type) {
+		isSelectedPosition() {
+			return this.form.selectedPosition > 0;
+		},
+		isSelectedDriver() {
+			return this.position == "Řidič(ka)";
+		},
+		isSelectedServiceman() {
+			return this.position == "Zaměstnanec servisu";
+		},
+		isSelectedManagement() {
+			return this.position == "Management";
+		},
+/*		isSelectedTram() {
+			return this.position == 1 && this.typeOfBus == 'Tramvaj';
+		},	*/
+/*		getNameForDepot(type) {
 			if (type == 1) {
 				return 'Autobusové depo';
 			} else if (type == 2) {
@@ -18,8 +47,10 @@ new Vue({
 			} else if (type == 3) {
 				return 'Depo pro osobní vozidla';
 			}
+		},*/
+		isSubmitDisabled() {
+			return !this.isSelectedPosition() || this.form.errors.any()
 		},
-		
 		isTableVisible() {
 			if (this.isLoading) {
 				return false
@@ -27,20 +58,19 @@ new Vue({
 				return this.fetchedEmployees.length > 0
 			}
 		},
-		/*
+
 		onSubmit() {
 			this.isLoading = true;
-			this.typeOfVehicle = this.form.selectedTypeOfVehicle;
-			this.typeOfBus = this.form.selectedTypeOfBus;
-			this.form.post('/vehicles')
-				.then(data => this.fillVehiclesArray(data))
+			this.position = this.form.selectedPosition;
+			this.form.post('/employees')
+				.then(data => this.fillEmployeesArray(data))
 				.catch(errors => console.log(errors));
 		},
-*/
+
 		fillEmployeesArray(data) {
-			console.log(data); 
+			console.log(data);
 			this.isLoading = false;
-			this.fetchedEmployees = data.response;
+			this.fetchedVehicles = data.response;
 		}
 	}
 
