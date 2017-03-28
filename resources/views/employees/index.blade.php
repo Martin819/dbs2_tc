@@ -58,7 +58,7 @@
               <td>@{{ employee.fullName }}</td>
               <td>@{{ employee.position }}</td>
               <td>@{{ employee.dateHired }}</td>
-              <td>@{{ employee.branchID }}</td>
+              <td>@{{ employee.branchAddress }}</td>
               <td><a class="btn btn-info" v-bind:href="'/employees/' + employee.VID"><img src="img/pencil.png" style="width:24px;height:24px;"> Detail</a></td>
             </tr>
           </tbody>
@@ -77,8 +77,5 @@
 @endsection
 
 @section('scripts')
-  <script type="text/javascript">
-    var fetchedBranches = {!! $branches !!};
-  </script>
   <script src="/js/employees/index.js"></script>
 @endsection

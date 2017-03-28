@@ -4,14 +4,14 @@ new Vue({
 
 	data: {
 
-		branches: this.fetchedBranches
+		branches: this.fetchedBranches,
 
 		employeePositions: [
 		  { text: 'Vyberte pozici' , value: '0', isDisabled: true },
-	      { text: 'Ridic(ka)', value: '1', isDisabled: false },
-	      { text: 'Zamestnanec servisu', value: '2', isDisabled: false },
-	      { text: 'Management', value: '3', isDisabled: false }
-	      { text: 'Ostatni', value: '4', isDisabled: false }
+	      { text: 'Řidič(ka)', value: '1', isDisabled: false },
+	      { text: 'Zaměstnanec servisu', value: '2', isDisabled: false },
+	      { text: 'Management', value: '3', isDisabled: false },
+/*	      { text: 'Ostatní', value: '4', isDisabled: false }*/
 	    ],
 
 	    form: new Form({
@@ -70,7 +70,7 @@ new Vue({
 		fillEmployeesArray(data) {
 			console.log(data);
 			this.isLoading = false;
-			this.fetchedVehicles = data.response;
+			this.fetchedEmployees = data.response;
 		}
 	}
 

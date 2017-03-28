@@ -14,8 +14,8 @@ class EmployeesController extends Controller
 
     public function create()
     {
-    	$branches = DB::table('view_branches')->get();
-        return view('employees.index', compact('branches'));
+/*    	$branches = DB::table('view_branches')->get();*/
+        return view('employees.index');
     }
 
 /*    public function detail($vid)
@@ -133,7 +133,7 @@ class EmployeesController extends Controller
                 'selectedPosition' => 'required'
             ]);
             $drivers = DB::table('view_drivers')->get();
-            return ['message' => 'Search request', 'request' => request()->all(), 'response' => $drivers];
+            return ['message' => 'Search request drivers', 'request' => request()->all(), 'response' => $drivers];
 
         } else if ($position == "Zaměstnanec servisu") {
 
@@ -141,7 +141,7 @@ class EmployeesController extends Controller
                 'selectedPosition' => 'required'
             ]);
             $servicemen = DB::table('view_servicemen')->get();
-            return ['message' => 'Search request', 'request' => request()->all(), 'response' => $servicemen];
+            return ['message' => 'Search request servicemen', 'request' => request()->all(), 'response' => $servicemen];
 
         } else if ($position == "Management") {
 
@@ -149,16 +149,16 @@ class EmployeesController extends Controller
                 'selectedPosition' => 'required'
             ]);
             $management = DB::table('view_management')->get();
-            return ['message' => 'Search request', 'request' => request()->all(), 'response' => $management];
+            return ['message' => 'Search request management', 'request' => request()->all(), 'response' => $management];
 
         } else {
 
-            $this->validate(request(), [
+            /*$this->validate(request(), [
                 'selectedPosition' => 'required'
             ]);
             $otherEmployees = DB::table('view_otherEmployees')->get();
-            return ['message' => 'Search request', 'request' => request()->all(), 'response' => $otherEmployees];
-
+            return ['message' => 'Search request otherEmployees', 'request' => request()->all(), 'response' => $otherEmployees];*/
+            return ['message' => 'Unknown position.'];
         }
         
     }
