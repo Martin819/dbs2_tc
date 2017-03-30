@@ -4,8 +4,6 @@ new Vue({
 
 	data: {
 
-		branches: this.fetchedBranches,
-
 		employeePositions: [
 		  { text: 'Vyberte pozici' , value: '0', isDisabled: true },
 	      { text: 'Řidič(ka)', value: '1', isDisabled: false },
@@ -18,7 +16,7 @@ new Vue({
 	    	selectedPosition: '0',
 	    }),
 
-	    position: "",
+	    position: '',
 	    fetchedEmployees: [],
 	    isLoading: false
 	},
@@ -28,26 +26,15 @@ new Vue({
 			return this.form.selectedPosition > 0;
 		},
 		isSelectedDriver() {
-			return this.position == "Řidič(ka)";
+			return this.position == "Ridic";
 		},
 		isSelectedServiceman() {
-			return this.position == "Zaměstnanec servisu";
+			return this.position == "Servis";
 		},
 		isSelectedManagement() {
 			return this.position == "Management";
 		},
-/*		isSelectedTram() {
-			return this.position == 1 && this.typeOfBus == 'Tramvaj';
-		},	*/
-/*		getNameForDepot(type) {
-			if (type == 1) {
-				return 'Autobusové depo';
-			} else if (type == 2) {
-				return 'Depo pro nákladní vozy'; 
-			} else if (type == 3) {
-				return 'Depo pro osobní vozidla';
-			}
-		},*/
+
 		isSubmitDisabled() {
 			return !this.isSelectedPosition() || this.form.errors.any()
 		},
