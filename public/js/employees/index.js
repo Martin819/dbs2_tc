@@ -4,13 +4,11 @@ new Vue({
 
 	data: {
 
-		branches: this.fetchedBranches,
-
 		employeePositions: [
 		  { text: 'Vyberte pozici' , value: '0', isDisabled: true },
-	      { text: 'Řidič(ka)', value: '1', isDisabled: false },
-	      { text: 'Zaměstnanec servisu', value: '2', isDisabled: false },
-	      { text: 'Management', value: '3', isDisabled: false },
+	      { text: 'Řidič(ka)', value: 'Ridic', isDisabled: false },
+	      { text: 'Zaměstnanec servisu', value: 'Servis', isDisabled: false },
+	      { text: 'Management', value: 'Management', isDisabled: false },
 /*	      { text: 'Ostatní', value: '4', isDisabled: false }*/
 	    ],
 
@@ -18,38 +16,31 @@ new Vue({
 	    	selectedPosition: '0',
 	    }),
 
-	    position: "",
+	    position: '',
 	    fetchedEmployees: [],
 	    isLoading: false
 	},
 
 	methods: {
 		isSelectedPosition() {
-			return this.form.selectedPosition > 0;
+			return this.isSelectedDriver() || this.isSelectedServiceman() || this.isSelectedManagement();
 		},
 		isSelectedDriver() {
-			return this.position == "Řidič(ka)";
+			return this.position == "Ridic"; 
 		},
 		isSelectedServiceman() {
-			return this.position == "Zaměstnanec servisu";
+			return this.position == "Servis";
 		},
 		isSelectedManagement() {
 			return this.position == "Management";
 		},
-/*		isSelectedTram() {
-			return this.position == 1 && this.typeOfBus == 'Tramvaj';
-		},	*/
-/*		getNameForDepot(type) {
-			if (type == 1) {
-				return 'Autobusové depo';
-			} else if (type == 2) {
-				return 'Depo pro nákladní vozy'; 
-			} else if (type == 3) {
-				return 'Depo pro osobní vozidla';
-			}
-		},*/
+
 		isSubmitDisabled() {
-			return !this.isSelectedPosition() || this.form.errors.any()
+			if (this.isLoading) {
+				return true;
+			} else {
+				return !this.isSelectedPosition();
+			}
 		},
 		isTableVisible() {
 			if (this.isLoading) {

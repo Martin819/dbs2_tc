@@ -19,8 +19,9 @@ Route::get('/offices', 'OfficesController@index');
 
 Route::get('/employees', 'EmployeesController@create');
 Route::post('/employees', 'EmployeesController@search');
-Route::get('/branches', 'BranchesController@create');
-Route::post('/branches', 'BranchesController@search');
+Route::get('/employees/new', 'EmployeesController@new');
+Route::post('/employees/new', 'EmployeesController@store');
+Route::get('/employees/{eid}', 'EmployeesController@detail');
 
 Route::get('/vehicles', 'VehiclesController@create');
 Route::post('/vehicles', 'VehiclesController@search');

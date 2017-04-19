@@ -18,27 +18,27 @@ class EmployeesController extends Controller
         return view('employees.index');
     }
 
-/*    public function detail($vid)
+    public function detail($eid)
     {
-        $type = DB::table('vehicles')->where('VID', $vid)->value('type');
-        $journeylog = DB::table('view_journeylogs')->where('VID', $vid)->get();
-        if ($type != null) {
-            if ($type == 1) {
-                $vehicle = DB::table('view_buses')->where('VID', $vid)->get();
-                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog'));
-            } else if ($type == 2) {
-                $vehicle = DB::table('view_trucks')->where('VID', $vid)->get();
-                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog'));
-            } else if ($type == 3) {
-                $vehicle = DB::table('view_personal')->where('VID', $vid)->get();
-                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog'));
+        $position = DB::table('employees')->where('EID', $eid)->value('position');
+        $workingHoursLogs = DB::table('view_workingHoursLogs')->where('EID', $eid)->get();
+        if ($position != null) {
+            if ($position == 'Ridic') {
+                $employee = DB::table('view_drivers')->where('EID', $eid)->get();
+                return view('employees.detail', compact('employee', 'position', 'workingHoursLogs'));
+            } else if ($position == 'Servis') {
+                $employee = DB::table('view_servicemen')->where('EID', $eid)->get();
+                return view('employees.detail', compact('employee', 'position', 'workingHoursLogs'));
+            } else if ($position == 'Management') {
+                $employee = DB::table('view_management')->where('EID', $eid)->get();
+                return view('employees.detail', compact('employee', 'position', 'workingHoursLogs'));
             } else {
-                return ['message' => 'Unknown type of vehicle.'];
+                return ['message' => 'Unknown position.'];
             }
         } else {
-            return ['message' => 'Vehicle not found.'];
+            return ['message' => 'Employee not found.'];
         }
-    }*/
+    }
 
 /*    public function edit()
     {
@@ -127,7 +127,7 @@ class EmployeesController extends Controller
     public function search()
     {
         $position = request('selectedPosition');
-        if ($position == "Řidič(ka)") {
+        if ($position == "Ridic") {
 
             $this->validate(request(), [
                 'selectedPosition' => 'required'
@@ -135,7 +135,7 @@ class EmployeesController extends Controller
             $drivers = DB::table('view_drivers')->get();
             return ['message' => 'Search request drivers', 'request' => request()->all(), 'response' => $drivers];
 
-        } else if ($position == "Zaměstnanec servisu") {
+        } else if ($position == "Servis") {
 
             $this->validate(request(), [
                 'selectedPosition' => 'required'
@@ -158,7 +158,7 @@ class EmployeesController extends Controller
             ]);
             $otherEmployees = DB::table('view_otherEmployees')->get();
             return ['message' => 'Search request otherEmployees', 'request' => request()->all(), 'response' => $otherEmployees];*/
-            return ['message' => 'Unknown position.'];
+            return ['message' => 'Unknown position.', 'request' => request()->all()];
         }
         
     }

@@ -32,7 +32,7 @@
 </select>
 </transition> -->
 
-        <button type="submit" class="btn btn-primary mb-2 mr-sm-2 mb-sm-0" :disabled="isSubmitDisabled()"><img src="img/search.png" style="width:24px;height:24px;"> Hledat</button>
+        <button type="submit" class="btn btn-primary mb-2 mr-sm-2 mb-sm-0"><img src="img/search.png" style="width:24px;height:24px;"> Hledat</button>
 
         </form> 
 
