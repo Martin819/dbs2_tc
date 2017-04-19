@@ -59,7 +59,7 @@
               <td>@{{ employee.position }}</td>
               <td>@{{ employee.dateHired }}</td>
               <td>@{{ employee.branchAddress }}</td>
-              <td><a class="btn btn-info" v-bind:href="'/employees/' + employee.VID"><img src="img/pencil.png" style="width:24px;height:24px;"> Detail</a></td>
+              <td><a class="btn btn-info" v-bind:href="'/employees/' + employee.EID"><img src="img/pencil.png" style="width:24px;height:24px;"> Detail</a></td>
             </tr>
           </tbody>
 

@@ -7,7 +7,7 @@
 @section('content')
 	<div class="jumbotron">
 	  <div class="container">
-	    <h1 class="display-3">Jízdní řády</h1>
+	    <h1 class="display-3">Jízdní řády - linka @{{ busline.lid }}</h1>
 	  </div>
 	</div>
 
@@ -18,15 +18,19 @@
 
 		      <thead>
 		        <tr>
-		        	<th>Číslo linky:</th>
-		         	<th></th>
+		        	<th>Zastávka:</th>
+		         	<th>Den:</th>
+		         	<th>Čas:</th>
+		         	<th>Autobus:</th>
 		        </tr>
 		      </thead>
 
 		      <tbody>
-		      	<tr v-for="busline in buslines">
-		      		<td v-text="busline.lineNr"></td>
-		      		<td><a class="btn btn-info" v-bind:href="'/buslines/' + busline.LID"><img src="img/pencil.png" style="width:24px;height:24px;"> Detail</a></td>
+		      	<tr v-for="timetable in timetables">
+		      		<td v-text="timetable.busStopName"></td>
+		      		<td v-text="timetable.dayOfWeek"></td>
+		      		<td v-text="timetable.timeOfArrival"></td>
+		      		<td v-text="timetable.busID"></td>
 		      	</tr>
 		      </tbody>
 
@@ -37,8 +41,5 @@
 @endsection
 
 @section('scripts')
-	<script type="text/javascript">
-		var buslines = {!! $buslines !!}
-	</script>
 	<script src="/js/timetables/index.js"></script>
 @endsection
