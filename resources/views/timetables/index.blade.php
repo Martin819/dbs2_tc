@@ -13,12 +13,18 @@
 
 	<div class="jumbotron content_container">
 		<div class="container" id="timetables_index">
-		    <div class="d-flex justify-content-start" v-for="busline in buslines">
-			  <div class="p-2">Linka <strong>@{{busline.lineNr}}</strong></div>
-			  <div class="ml-auto p-2">
-			  	<a class="btn btn-info" v-bind:href="'/timetables/' + busline.LID"><img src="img/pencil.png" style="width:24px;height:24px;"> Detail</a>
-			  </div>
-			</div>
+			<table class="table table-hover borderless">
+				<thead>
+					<th>Linka</th>
+					<th style="width:1%;"></th>
+				</thead>
+				<tbody>
+					<tr v-for="busline in buslines">
+						<td v-text="busline.lineNr"></td>
+						<td><a class="btn btn-info" v-bind:href="'/timetables/' + busline.LID"><img src="img/pencil.png" style="width:24px;height:24px;"> Detail</a></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 @endsection
