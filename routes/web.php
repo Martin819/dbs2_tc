@@ -36,7 +36,14 @@ Route::get('/buslines/{lid}', 'TimetablesController@detail');
 
 Route::get('/customers', 'CustomersController@create');
 Route::post('/customers', 'CustomersController@search');
+
+Route::get('/customers/new', 'CustomersController@newCus');
+Route::post('/customers/new', 'CustomersController@newStore');
+
+Route::post('/customers/invoices/new', 'CustomersController@newInvoice');
+
 Route::get('/customers/{cid}', 'CustomersController@detail');
+
 
 Route::get('/register', 'RegistrationController@create');
 Route::post('/register', 'RegistrationController@store');

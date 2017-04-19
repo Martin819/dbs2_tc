@@ -79,4 +79,55 @@ class CustomersController extends Controller
     	}
  
     }
+
+    public function newCus()
+    {
+        return view('customers.new');
+    }
+
+    public function newStore()
+    {
+        $this->validate(request(), [
+            'streetName' => 'required',
+            'houseNr' => 'required',
+            'city' => 'required',
+            'postalCode' => 'required'
+        ]);
+
+        if (request('firstname')) {
+            $this->validate(request(), [
+                'firstname' => 'required',
+                'lastname' => 'required'
+            ]);
+        } else {
+            $this->validate(request(), [
+                'companyName' => 'required',
+                'companyIdentNr' => 'required'
+            ]);
+        }
+
+        $addressId = DB::table('addresses')->insertGetId([
+            'streetName' => request('streetName'),
+            'houseNr' => request('houseNr'),
+            'city' => request('city'),
+            'postalCode' => request('postalCode'),
+            'stateCODE' => 'CZ'
+        ]);
+
+        DB::table('customers')->insert([
+            'firstName' => request('firstname'),
+            'lastname' => request('lastname'),
+            'companyName' => request('companyName'),
+            'companyIdentNr' => request('companyIdentNr'),
+            'addressID' => $addressId
+        ]);
+        
+        return ['Message' => 'Create customer request.', 'Request' => request()->all()];
+    }
+
+    public function newInvoice()
+    {
+        
+        return ['Message' => 'New invoice request', 'Request' => request()->all()];
+    }
 }
