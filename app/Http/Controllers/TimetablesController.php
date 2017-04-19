@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class TimetablesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');  
+    }
+
     public function create()
     {
     	$buslines = DB::table('buslines')->get();
@@ -15,8 +20,7 @@ class TimetablesController extends Controller
 
 	public function detail($lid)
     {
-    	$busline = DB::table('buslines')->where('LID', $lid)->get();
-        $timetables = DB::table('view_timetable')->where('busLineID', $lid)->get();
-        return view('timetables.detail', compact('timetable', 'busline'));
+        $timetable = DB::table('view_timetables')->where('busLineID', $lid)->get();
+        return view('timetables.detail', compact('lid', 'timetable'));
     }
 }

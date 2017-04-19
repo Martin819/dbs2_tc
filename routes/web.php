@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/offices', 'OfficesController@index');
+Route::get('/offices', 'BranchesController@create');
 
 Route::get('/employees', 'EmployeesController@create');
 Route::post('/employees', 'EmployeesController@search');
@@ -32,7 +32,7 @@ Route::post('/vehicles/edit', 'VehiclesController@edit');
 Route::post('/vehicles/delete', 'VehiclesController@delete');
 
 Route::get('/timetables', 'TimetablesController@create');
-Route::get('/buslines/{lid}', 'TimetablesController@detail');
+Route::get('/timetables/{lid}', 'TimetablesController@detail');
 
 Route::get('/customers', 'CustomersController@create');
 Route::post('/customers', 'CustomersController@search');
