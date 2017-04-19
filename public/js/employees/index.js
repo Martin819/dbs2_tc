@@ -6,9 +6,9 @@ new Vue({
 
 		employeePositions: [
 		  { text: 'Vyberte pozici' , value: '0', isDisabled: true },
-	      { text: 'Řidič(ka)', value: '1', isDisabled: false },
-	      { text: 'Zaměstnanec servisu', value: '2', isDisabled: false },
-	      { text: 'Management', value: '3', isDisabled: false },
+	      { text: 'Řidič(ka)', value: 'Ridic', isDisabled: false },
+	      { text: 'Zaměstnanec servisu', value: 'Servis', isDisabled: false },
+	      { text: 'Management', value: 'Management', isDisabled: false },
 /*	      { text: 'Ostatní', value: '4', isDisabled: false }*/
 	    ],
 
@@ -23,10 +23,10 @@ new Vue({
 
 	methods: {
 		isSelectedPosition() {
-			return this.form.selectedPosition > 0;
+			return this.isSelectedDriver() || this.isSelectedServiceman() || this.isSelectedManagement();
 		},
 		isSelectedDriver() {
-			return this.position == "Ridic";
+			return this.position == "Ridic"; 
 		},
 		isSelectedServiceman() {
 			return this.position == "Servis";
@@ -36,7 +36,11 @@ new Vue({
 		},
 
 		isSubmitDisabled() {
-			return !this.isSelectedPosition() || this.form.errors.any()
+			if (this.isLoading) {
+				return true;
+			} else {
+				return !this.isSelectedPosition();
+			}
 		},
 		isTableVisible() {
 			if (this.isLoading) {

@@ -158,7 +158,7 @@ class EmployeesController extends Controller
             ]);
             $otherEmployees = DB::table('view_otherEmployees')->get();
             return ['message' => 'Search request otherEmployees', 'request' => request()->all(), 'response' => $otherEmployees];*/
-            return ['message' => 'Unknown position.'];
+            return ['message' => 'Unknown position.', 'request' => request()->all()];
         }
         
     }
