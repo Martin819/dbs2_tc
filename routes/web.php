@@ -21,6 +21,7 @@ Route::get('/employees', 'EmployeesController@create');
 Route::post('/employees', 'EmployeesController@search');
 Route::get('/employees/new', 'EmployeesController@new');
 Route::post('/employees/new', 'EmployeesController@store');
+Route::post('/employees/edit', 'EmployeesController@edit');
 Route::get('/employees/{eid}', 'EmployeesController@detail');
 
 Route::get('/vehicles', 'VehiclesController@create');
@@ -39,7 +40,7 @@ Route::post('/customers', 'CustomersController@search');
 
 Route::get('/customers/new', 'CustomersController@newCus');
 Route::post('/customers/new', 'CustomersController@newStore');
-
+Route::post('/customers/edit', 'CustomersController@edit');
 Route::post('/customers/invoices/new', 'CustomersController@newInvoice');
 
 Route::get('/customers/{cid}', 'CustomersController@detail');

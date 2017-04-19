@@ -14,30 +14,153 @@ class EmployeesController extends Controller
 
     public function create()
     {
-/*    	$branches = DB::table('view_branches')->get();*/
-        return view('employees.index');
+    	$positions = DB::table('employees')->distinct()->orderBy('position')->get(['position']);
+        return view('employees.index', compact('positions'));
     }
 
     public function detail($eid)
     {
         $position = DB::table('employees')->where('EID', $eid)->value('position');
         $workingHoursLogs = DB::table('view_workingHoursLogs')->where('EID', $eid)->get();
+        $positions = DB::table('employees')->distinct()->orderBy('position')->get(['position']);
         if ($position != null) {
             if ($position == 'Ridic') {
                 $employee = DB::table('view_drivers')->where('EID', $eid)->get();
-                return view('employees.detail', compact('employee', 'position', 'workingHoursLogs'));
+                return view('employees.detail', compact('employee', 'workingHoursLogs', 'positions'));
             } else if ($position == 'Servis') {
                 $employee = DB::table('view_servicemen')->where('EID', $eid)->get();
-                return view('employees.detail', compact('employee', 'position', 'workingHoursLogs'));
-            } else if ($position == 'Management') {
-                $employee = DB::table('view_management')->where('EID', $eid)->get();
-                return view('employees.detail', compact('employee', 'position', 'workingHoursLogs'));
+                return view('employees.detail', compact('employee', 'workingHoursLogs', 'positions'));
             } else {
-                return ['message' => 'Unknown position.'];
-            }
+                $employee = DB::table('view_management')->where('EID', $eid)->get();
+                return view('employees.detail', compact('employee', 'workingHoursLogs', 'positions'));
+            } 
         } else {
             return ['message' => 'Employee not found.'];
         }
+    }
+
+    public function edit()
+    {
+        $this->validate(request(), [
+            'position' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
+
+            'streetName' => 'required',
+            'houseNr' => 'required',
+            'city' => 'required',
+            'postalCode' => 'required'
+        ]);
+
+        DB::table('addresses')->where('AID', request('aid'))->update([
+            'streetName' => request('streetName'),
+            'houseNr' => request('houseNr'),
+            'city' => request('city'),
+            'postalCode' => request('postalCode')
+        ]);
+
+        DB::table('employees')->where('EID', request('eid'))->update([
+            'firstName' => request('firstname'),
+            'lastName' => request('lastname'),
+            'position' => request('position')
+        ]);
+
+        if (request('position') == 'Servis') {
+
+            $this->validate(request(), [
+                'hourlyWage' => 'required'
+            ]);
+
+            DB::table('servicemen')->where('EID', request('eid'))->update([
+                'hourlyWage' => request('hourlyWage')
+            ]);
+
+            echo "Ridic validovan";
+
+        } else if (request('position') == 'Ridic') {
+
+            $this->validate(request(), [
+                'hourlyWage' => 'required',
+                'lastTraining' => 'required'
+            ]);
+
+            DB::table('drivers')->where('EID', request('eid'))->update([
+                'hourlyWage' => request('hourlyWage'),
+                'lastTraining' => request('lastTraining')
+            ]);
+
+            echo "Servisak validovan";
+
+        } else {
+
+            $this->validate(request(), [
+                'annualSalary' => 'required'
+            ]);
+
+            DB::table('management')->where('EID', request('eid'))->update([
+                'annualSalary' => request('annualSalary')
+            ]);
+
+            echo "Manager validovan";
+
+        } 
+
+        if (request('position') != request('formerPosition')) {
+            echo "Zmena pozice";
+
+            if (request('formerPosition') == 'Ridic') {
+                DB::table('drivers')->where('EID', request('eid'))->delete();
+                echo "Byval ridic";
+            } else if (request('formerPosition') == 'Servis') {
+                DB::table('servicemen')->where('EID', request('eid'))->delete();
+                echo "Byval servisak";
+            } else {
+                DB::table('management')->where('EID', request('eid'))->delete();
+                echo "Byval manager";
+            }
+
+            if (request('position') == 'Servis') {
+                DB::table('servicemen')->insert([
+                    'EID' => request('eid'),
+                    'hourlyWage' => request('hourlyWage')
+                ]);
+                echo "Uz je servisak";
+            } else if (request('position') == 'Ridic') {
+                DB::table('drivers')->insert([
+                    'EID' => request('eid'),
+                    'hourlyWage' => request('hourlyWage'),
+                    'lastTraining' => request('lastTraining')
+                ]);
+                echo "Uz je ridic";
+            } else {
+                DB::table('management')->insert([
+                    'EID' => request('eid'),
+                    'annualSalary' => request('annualSalary')
+                ]);
+                echo "Uz je manager";
+            } 
+        } else {
+            if (request('position') == 'Servis') {
+                DB::table('servicemen')->where('EID', request('eid'))->update([
+                    'hourlyWage' => request('hourlyWage')
+                ]);
+                echo "Upravena data servicemen";
+            } else if (request('position') == 'Ridic') {
+                DB::table('drivers')->where('EID', request('eid'))->update([
+                    'hourlyWage' => request('hourlyWage'),
+                    'lastTraining' => request('lastTraining')
+                ]);
+                echo "Upravena data drivers";
+            } else {
+                DB::table('management')->where('EID', request('eid'))->update([
+                    'annualSalary' => request('annualSalary')
+                ]);
+                echo "Upravena data management";
+            } 
+        }
+
+        return ['Message' => 'Edit request', 'Request' => request()->all()];
+
     }
 
 /*    public function edit()
@@ -143,23 +266,15 @@ class EmployeesController extends Controller
             $servicemen = DB::table('view_servicemen')->get();
             return ['message' => 'Search request servicemen', 'request' => request()->all(), 'response' => $servicemen];
 
-        } else if ($position == "Management") {
+        } else {
 
             $this->validate(request(), [
                 'selectedPosition' => 'required'
             ]);
-            $management = DB::table('view_management')->get();
+            $management = DB::table('view_management')->where('position', $position)->get();
             return ['message' => 'Search request management', 'request' => request()->all(), 'response' => $management];
 
-        } else {
-
-            /*$this->validate(request(), [
-                'selectedPosition' => 'required'
-            ]);
-            $otherEmployees = DB::table('view_otherEmployees')->get();
-            return ['message' => 'Search request otherEmployees', 'request' => request()->all(), 'response' => $otherEmployees];*/
-            return ['message' => 'Unknown position.', 'request' => request()->all()];
-        }
+        } 
         
     }
 

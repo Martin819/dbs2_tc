@@ -19,8 +19,8 @@
       <form class="form-inline" method="POST" action="/employees" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
         
         <select class="form-control mb-2 mr-sm-2 mb-sm-0" v-model="form.selectedPosition">
-          <option v-for="position in employeePositions" v-bind:value="position.value" :disabled="position.isDisabled">
-            @{{ position.text }}
+          <option v-for="position in employeePositions" v-bind:value="position.position" :disabled="position.isDisabled">
+            @{{ position.position }}
           </option>
         </select>
 
@@ -55,7 +55,7 @@
 
           <tbody>
             <tr v-for="employee in fetchedEmployees">
-              <td>@{{ employee.fullName }}</td>
+              <td>@{{ employee.firstName + ' ' + employee.lastName }}</td>
               <td>@{{ employee.position }}</td>
               <td>@{{ employee.dateHired }}</td>
               <td>@{{ employee.branchAddress }}</td>
@@ -77,5 +77,8 @@
 @endsection
 
 @section('scripts')
+  <script>
+    var positions = {!! $positions !!};
+  </script>
   <script src="/js/employees/index.js"></script>
 @endsection

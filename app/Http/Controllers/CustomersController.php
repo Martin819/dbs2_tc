@@ -19,7 +19,7 @@ class CustomersController extends Controller
 
     public function detail($cid) 
     {
-        $customer = DB::table('customers')->where('CID', $cid)->get();
+        $customer = DB::table('view_customers')->where('CID', $cid)->get();
         $contracts = DB::table('contracts')->where('customerID', $cid)->get();
         $companyName = $customer[0]->companyName;
         if ($companyName == null) {
@@ -123,6 +123,44 @@ class CustomersController extends Controller
         ]);
         
         return ['Message' => 'Create customer request.', 'Request' => request()->all()];
+    }
+
+    public function edit()
+    {
+        if (request('firstname')) {
+            $this->validate(request(), [
+                'firstname' => 'required',
+                'lastname' => 'required'
+            ]);
+        } else {
+            $this->validate(request(), [
+                'companyName' => 'required',
+                'companyIdentNr' => 'required'
+            ]);
+        }
+
+        $this->validate(request(), [
+            'streetName' => 'required',
+            'houseNr' => 'required',
+            'city' => 'required',
+            'postalCode' => 'required'
+        ]);
+
+        DB::table('customers')->where('CID', request('cid'))->update([
+            'firstName' => request('firstname'),
+            'lastname' => request('lastname'),
+            'companyName' => request('companyName'),
+            'companyIdentNr' => request('companyIdentNr')
+        ]);
+
+        DB::table('addresses')->where('AID', request('aid'))->update([
+            'streetName' => request('streetName'),
+            'houseNr' => request('houseNr'),
+            'city' => request('city'),
+            'postalCode' => request('postalCode')
+        ]);
+
+        return ['Message' => 'Edit customer', 'Request' => request()->all()];
     }
 
     public function newInvoice()

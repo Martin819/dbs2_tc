@@ -16,10 +16,18 @@ var cd = new Vue({
 
 	    form: new Form({
 	    	typeOfCustomer: 'Vyberte typ zákazníka',
+
+	    	cid: '',
 	    	firstname: '',
 	    	lastname: '',
 	    	companyName: '',
-	    	companyIdentNr: ''
+	    	companyIdentNr: '',
+
+	    	aid: '',
+	    	streetName: '',
+	    	houseNr: '',
+	    	city: '',
+	    	postalCode: ''
 	    })
 
 	},
@@ -39,7 +47,7 @@ var cd = new Vue({
 		onSubmit() {
 			this.typeOfCustomer = this.form.typeOfCustomer;
 			this.isLoading = true;
-			this.form.post('/customers')
+			this.form.post('/customers/edit')
 				.then(data => console.log(data))
 				.catch(errors => console.log(errors));
 		},
@@ -54,6 +62,12 @@ var cd = new Vue({
 				this.form.companyName = this.customer.companyName;
 				this.form.companyIdentNr = this.customer.companyIdentNr;
 			}
+			this.form.cid = this.customer.CID;
+			this.form.aid = this.customer.AID;
+			this.form.streetName = this.customer.streetName;
+			this.form.houseNr = this.customer.houseNr;
+			this.form.city = this.customer.city;
+			this.form.postalCode = this.customer.postalCode;
 		},
 
 		printSth() {

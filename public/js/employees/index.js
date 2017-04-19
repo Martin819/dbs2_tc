@@ -4,13 +4,15 @@ new Vue({
 
 	data: {
 
-		employeePositions: [
-		  { text: 'Vyberte pozici' , value: '0', isDisabled: true },
-	      { text: 'Řidič(ka)', value: 'Ridic', isDisabled: false },
-	      { text: 'Zaměstnanec servisu', value: 'Servis', isDisabled: false },
-	      { text: 'Management', value: 'Management', isDisabled: false },
-/*	      { text: 'Ostatní', value: '4', isDisabled: false }*/
-	    ],
+// 		employeePositions: [
+// 		  { text: 'Vyberte pozici' , value: '0', isDisabled: true },
+// 	      { text: 'Řidič(ka)', value: 'Ridic', isDisabled: false },
+// 	      { text: 'Zaměstnanec servisu', value: 'Servis', isDisabled: false },
+// 	      { text: 'Management', value: 'Management', isDisabled: false },
+// /*	      { text: 'Ostatní', value: '4', isDisabled: false }*/
+// 	    ],
+
+		employeePositions: this.positions,
 
 	    form: new Form({
 	    	selectedPosition: '0',

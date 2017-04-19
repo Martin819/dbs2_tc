@@ -86,7 +86,7 @@
 
 @section('scripts')
 	<script type="text/javascript">
-
+		
 	</script>
 	<script src="/js/customers/index.js"></script>
 @endsection
