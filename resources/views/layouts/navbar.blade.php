@@ -33,8 +33,15 @@
 
     @else
 
-      <div class="ml-auto">
-        <a class="nav-link" style="color:white;" href="/login">Přihlásit se</a>
+      <div class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" style="color:white;" href="/register">Registrace</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white;" href="/login">Přihlásit se</a>
+          </li>
+          </ul>
       </div>
       
     @endif
