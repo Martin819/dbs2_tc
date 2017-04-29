@@ -36,16 +36,30 @@
 
         </form> 
 
-        <a class="btn btn-warning ml-auto" href="/branche/new"><img src="img/add.png" style="width:24px;height:24px;"> Přidat novou pobocku</a>
+        
 
         </div>
 
         <transition name="fade" v-if="isTableVisible()">
         <table class="table table-hover borderless" style="margin-top: 30px;">
-          <thead><th>Adresa</th></thead>
+          <thead>
+          <th>Název</th>
+          <th>Ulice</th>
+          <th>Město</th>
+          <th>PSČ</th>
+          <th>Stát</th>
+          <th style="width:1%;"></th>
+          </thead>
           <tbody>
             <tr v-for="branch in fetchedBranches">
+            <td v-text="branch.name"></td>
               <td v-text="branch.streetName + ' ' + branch.houseNr"></td>
+              <td v-text="branch.city"></td>
+              <td v-text="branch.postalCode"></td>
+              <td v-text="branch.stateCODE"></td>
+              <td><a class="btn btn-info" v-bind:href="'/branches/' + branch.ID"><img src="img/pencil.png" style="width:24px;height:24px;"> Detail</a></td>
+
+
             </tr>
           </tbody>
         </table>

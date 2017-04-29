@@ -20,10 +20,12 @@ class BranchesController extends Controller
 
     public function detail($bid)
     {
+        $branchesVehicles = DB::table('view_branches_vehicles')->where('BID', $bid)->get();
+        $branchesEmployees = DB::table('view_branches_employees')->where('BID', $bid)->get();
         $type = DB::table('branches')->where('BID', $bid)->value('type');
         if ($type != null) {
             if ($type == 1) {
-                $branches = DB::table('view_depots1')->where('BID', $bid)->get();
+                $branches = DB::table('view_depots')->where('BID', $bid)->get();
                 return view('branches.detail', compact('branches', 'type'));
             } else if ($type == 2) {
                 $branches = DB::table('view_offices')->where('BID', $bid)->get();

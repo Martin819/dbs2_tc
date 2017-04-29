@@ -4,7 +4,8 @@ var vm = new Vue({
 
 	data: {
 		
-		branchesData: this.branches[0],
+		branches: this.branches,
+		branchID: this.branchID[0].branchID,
 		type: this.type,
 
 		branchesTypes: [
@@ -23,13 +24,25 @@ var vm = new Vue({
 	    	houseNr: '',
 	    	city: '',
 	    	postalCode: '',
-	    }),
 
-	    isLoading: false
+	    	id:'',
+	    	firstName:'',
+	    	lastName:'',
+	    	position:'',
+	    	dateHired:'',
+
+	    	vid:'',
+	    	maker:'',
+	    	model:'',
+	    	plateNumber:'',
+	    	litresPerKilometer:'',
+
+	    	branchID:''
+	    }),
 
 	},
 
-	methods: {
+	computed: {
 
 		isDepot() {
 			return this.form.typeOfBranches == 1;
@@ -40,18 +53,33 @@ var vm = new Vue({
 		},
 
 		isWarehouse() {
-			return this.form.typeOfBranches == 1;
-		},
+			return this.form.typeOfBranches == 3;
+		}
+	},
+
+	methods: {
 
 		fillForm() {
-			$branches = this.branchesData;
 			this.form.typeOfBranches = this.type;
-			this.form.bid = $branches.BID;
-			this.form.streetName = $branches.streetName;
-			this.form.houseNr = $branches.houseNr;
-			this.form.city = $branches.city;
-			this.form.postalCode= $branches.postalCode;
-			this.form.stateCode=$branches.stateCode;
+			this.form.branchID = this.branchID;
+			this.form.streetName = this.branch.streetName;
+			this.form.houseNr = this.branch.houseNr;
+			this.form.city = this.branch.city;
+			this.form.postalCode= this.branch.postalCode;
+			this.form.stateCode=this.branch.stateCode;
+
+			this.form.id = this.employees.id;
+			this.form.firstName = this.employees.firstName;
+			this.form.lastName = this.employees.lastName;
+			this.form.position = this.employees.positon;
+			this.form.dateHired = this.employees.dateHired;
+
+			this.form.vid = this.vehicles.vid;
+			this.form.maker = this.vehicles.maker;
+			this.form.model = this.vehicles.model;
+			this.form.plateNumber = this.vehicles.plateNumber;
+			this.form.litresPerKilometer = this.vehicles.litresPerKilometer;
+
 		},
 
 		onSubmit() {
