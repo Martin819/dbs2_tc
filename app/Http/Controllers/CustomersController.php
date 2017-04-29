@@ -165,7 +165,32 @@ class CustomersController extends Controller
 
     public function newInvoice()
     {
+        $this->validate(request(), [
+            'type' => 'required',
+            'startDest' => 'required',
+            'finalDest' => 'required',
+            'distance' => 'required',
+            'price' => 'required',
+        ]);
         
+        $contract_id = DB::table('contracts')->insertGetId([
+            'customerID' => request('customerID'),
+            'type' => request('type'),
+            'startDest' => request('startDest'),
+            'finalDest' => request('finalDest'),
+            'distance' => request('distance')
+        ]);
+
+        $invoice_id = DB::table('invoices')->insertGetId([
+            'customerID' => request('customerID'),
+            'price' => request('price')
+        ]);
+
+        DB::table('contracts_invoices')->insert([
+            'contractID' => $contract_id,
+            'invoiceID' => $invoice_id
+        ]);
+
         return ['Message' => 'New invoice request', 'Request' => request()->all()];
     }
 }

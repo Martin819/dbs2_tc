@@ -1,33 +1,36 @@
 @extends('layouts.master')
 
 @section('title')
-  Detail zákazníka
+  Vytvořit zaměstnance
 @endsection
 
 @section('content')
 	<div class="jumbotron">
 	  <div class="container">
-	    <h1 class="display-3">Detail zákazníka</h1>
+	    <h1 class="display-3">Vytvořit zaměstnance</h1>
 	  </div>
 	</div>
 
-	<div class="jumbotron content_container" id="customer_detail">
+	<div class="jumbotron content_container" id="new_employee">
 		<div class="container">
-			<form method="POST" action="/customers/edit" @submit.prevent="onSubmit">
+			<form method="POST" @submit.prevent="onSubmit">
+
+				<h5>Osobní údaje</h5>
+
 				<div class="row">
 							
 					<div class="col-md-4">
 						<div class="form-group">
-				  			<label for="vehicleType">Typ zákazníka:</label>
-							<select class="form-control" v-model="form.typeOfCustomer" disabled="true">
-							  <option v-for="type in typesOfCustomers" v-bind:value="type.text" :disabled="type.isDisabled">
-							    @{{ type.text }}
+				  			<label for="position">Pozice:</label>
+							<select class="form-control" v-model="form.position">
+							  <option v-for="position in positions">
+							    @{{ position }}
 							  </option>
 							</select>
 					 	</div>
 					</div>
 
-					<div class="col-md-4" v-if="isPerson">
+					<div class="col-md-4">
 						<div class="form-group">
 				  			<label for="firstname">Jméno:</label>
 						    <input type="text" class="form-control" id="firstname" name="firstname" v-model="form.firstname" required>
@@ -35,7 +38,7 @@
 					 	</div>
 					</div>
 
-					<div class="col-md-4" v-if="isPerson">
+					<div class="col-md-4">
 						<div class="form-group">
 				  			<label for="lastname">Příjmení:</label>
 						    <input type="text" class="form-control" id="lastname" name="lastname" v-model="form.lastname" required>
@@ -43,23 +46,44 @@
 					 	</div>
 					</div>
 
-					<div class="col-md-4" v-if="isCompany">
+				</div>
+
+				<div class="row">
+					
+					<div :class="!isDriver ? 'col-md-6' : 'col-md-4'">
 						<div class="form-group">
-				  			<label for="companyName">Jméno firmy:</label>
-						    <input type="text" class="form-control" id="companyName" name="companyName" v-model="form.companyName" required>
-						    <span class="small text-danger" v-if="form.errors.has('companyName')" v-text="form.errors.get('companyName')"></span>
+				  			<label for="dateHired">Datum nástupu:</label>
+						    <input type="text" class="form-control" id="dateHired" name="dateHired" v-model="form.dateHired" required="">
 					 	</div>
 					</div>
 
-					<div class="col-md-4" v-if="isCompany">
+					<div :class="!isDriver ? 'col-md-6' : 'col-md-4'" v-if="!isManagement">
 						<div class="form-group">
-				  			<label for="companyIdentNr">IČO:</label>
-						    <input type="text" class="form-control" id="companyIdentNr" name="companyIdentNr" v-model="form.companyIdentNr" required>
-						    <span class="small text-danger" v-if="form.errors.has('companyIdentNr')" v-text="form.errors.get('companyIdentNr')"></span>
+				  			<label for="hourlyWage">Hodinová mzda:</label>
+						    <input type="text" class="form-control" id="hourlyWage" name="hourlyWage" v-model="form.hourlyWage" required>
+						    <span class="small text-danger" v-if="form.errors.has('hourlyWage')" v-text="form.errors.get('hourlyWage')"></span>
+					 	</div>
+					</div>
+
+					<div class="col-md-4" v-if="isDriver">
+						<div class="form-group">
+				  			<label for="lastTraining">Poslední trénink:</label>
+						    <input type="text" class="form-control" id="lastTraining" name="lastTraining" v-model="form.lastTraining" required>
+						    <span class="small text-danger" v-if="form.errors.has('lastTraining')" v-text="form.errors.get('lastTraining')"></span>
+					 	</div>
+					</div>
+
+					<div class="col-md-6" v-if="isManagement">
+						<div class="form-group">
+				  			<label for="annualSalary">Roční mzda:</label>
+						    <input type="text" class="form-control" id="annualSalary" name="annualSalary" v-model="form.annualSalary" required>
+						    <span class="small text-danger" v-if="form.errors.has('annualSalary')" v-text="form.errors.get('annualSalary')"></span>
 					 	</div>
 					</div>
 
 				</div>
+
+				<h5 style="margin-top: 30px;">Bydliště</h5>
 
 				<div class="row">
 		  			<div class="col-lg-4">
@@ -98,10 +122,8 @@
 				<div class="row" style="margin-right: 0px;">
 
 					<div class="col-md-1">
-						<button type="submit" class="btn btn-primary">Uložit</button>
+						<button type="submit" class="btn btn-primary">Vytvořit</button>
 					</div>
-
-					<a class="btn btn-danger ml-auto" href="#">Smazat zákazníka</a>
 					
 				</div>
 
@@ -109,49 +131,8 @@
 		</div>
 	</div>
 
-	<div class="jumbotron">
-	  <div class="container">
-	    <h2 class="display-3">Zakázky</h2>
-	  </div>
-	</div>
-
-	<div class="jumbotron content_container" id="customer_invoices">
-		<div class="container">
-			<button class="btn btn-warning" @click="showAddInvioceModal()">Nová zakázka</button>
-
-			<table class="table table-hover borderless">
-
-		      <thead>
-		        <tr>
-		        	<th>Počáteční adresa:</th>
-		        	<th>Cílová adresa:</th>
-		        	<th>Vzdálenost:</th>
-		        	<th>Typ:</th>
-		        </tr>
-		      </thead>
-
-		      <tbody>
-		      	<tr v-for="contract in contracts">
-		      		<td v-text="contract.startDest"></td>
-		      		<td v-text="contract.finalDest"></td>
-		      		<td v-text="contract.distance + ' km'"></td>
-		      		<td v-text="contract.type"></td>
-		      	</tr>
-		      </tbody>
-
-		    </table>
-		</div>
-	</div>
-
-	@include('layouts.addinvoicemodal')
-
 @endsection
 
 @section('scripts')
-	<script type="text/javascript">
-		var companyName = {!! $companyName !!};
-		var customer = {!! $customer !!};
-		var contracts = {!! $contracts !!};
-	</script>
-	<script src="/js/customers/detail.js"></script>
+	<script src="/js/employees/new.js"></script>
 @endsection

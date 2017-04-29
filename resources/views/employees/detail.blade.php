@@ -14,6 +14,9 @@
 	<div class="jumbotron content_container" id="employee_detail">
 		<div class="container">
 			<form method="POST" @submit.prevent="onSubmit">
+
+				<h5>Osobní údaje</h5>
+
 				<div class="row">
 							
 					<div class="col-md-4">
@@ -80,6 +83,8 @@
 
 				</div>
 
+				<h5 style="margin-top: 30px;">Bydliště</h5>
+
 				<div class="row">
 		  			<div class="col-lg-4">
 		  				<div class="form-group">
@@ -120,7 +125,7 @@
 						<button type="submit" class="btn btn-primary">Uložit</button>
 					</div>
 
-					<a class="btn btn-danger ml-auto" href="#">Smazat zaměstnance</a>
+					<button type="button" class="btn btn-danger ml-auto" @click="deleteEmployee()">Smazat zaměstnance</button>
 					
 				</div>
 
@@ -128,44 +133,55 @@
 		</div>
 	</div>
 
-{{-- 	<div class="jumbotron">
+	<div class="jumbotron">
 	  <div class="container">
-	    <h2 class="display-3">Zakázky</h2>
+	    <h2 class="display-3">Odpracované hodiny</h2>
 	  </div>
 	</div>
 
-	<div class="jumbotron content_container" id="customer_invoices">
+	<div class="jumbotron content_container" id="workinglog">
 		<div class="container">
 			<table class="table table-hover borderless">
 
 		      <thead>
 		        <tr>
-		        	<th>Počáteční adresa:</th>
-		        	<th>Cílová adresa:</th>
-		        	<th>Vzdálenost:</th>
-		        	<th>Typ:</th>
+		        	<th>Druh práce:</th>
+		        	<th>Datum práce:</th>
+		        	<th>Čas práce:</th>
 		        </tr>
 		      </thead>
 
 		      <tbody>
-		      	<tr v-for="contract in contracts">
-		      		<td v-text="contract.startDest"></td>
-		      		<td v-text="contract.finalDest"></td>
-		      		<td v-text="contract.distance + ' km'"></td>
-		      		<td v-text="contract.type"></td>
+		      	<tr v-for="log in selectedlogs">
+		      		<td v-text="log.typeOfAction"></td>
+		      		<td v-text="log.dateOfAction"></td>
+		      		<td v-text="log.timeOfAction"></td>
 		      	</tr>
 		      </tbody>
 
 		    </table>
+
+		    <label v-if="workinghours.length < 1" style="color: #BBBBBB">Pro tohoto zaměstnance neexistují žádné záznamy.</label>
+
+		    <div class="row" v-if="workinghours.length > 0">
+		    	<div class="col-md-9">
+		    		<label v-text="'Zobrazeny záznamy od: '+from+' do: '+selectionEnd" style="color: #BBBBBB"></label>
+		    	</div>
+		    	
+		    	<div class="col-xl-3">
+		    		<button class="btn btn-primary ml-auto" :disabled="from <= 0" @click="previous">Předchozí</button>
+		    		<button class="btn btn-primary ml-auto" :disabled="to >= workinghours.length" @click="next">Následující</button>
+		    	</div>
+		    </div>
 		</div>
-	</div> --}}
+	</div>
 
 @endsection
 
 @section('scripts')
 	<script type="text/javascript">
 		var employee = {!! $employee !!};
-		var workingHoursLogs = {!! $workingHoursLogs !!};
+		var workinghours = {!! $workingHoursLogs !!};
 		var positions = {!! $positions !!};
 	</script>
 	<script src="/js/employees/detail.js"></script>
