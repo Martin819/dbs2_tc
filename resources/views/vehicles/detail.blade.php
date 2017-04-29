@@ -119,7 +119,7 @@
 							</transition>
 						</div>
 					</div>
-					<a class="btn btn-danger" href="#" v-on:click="del()"><img src="../img/delete.png" style="width:24px;height:24px;"> Smazat</a>
+					<a class="btn btn-danger ml-auto" href="#" v-on:click="del()"><img src="../img/delete.png" style="width:24px;height:24px;"> Smazat</a>
 				</div>
 			</form>	
 		</div>

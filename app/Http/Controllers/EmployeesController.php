@@ -163,90 +163,6 @@ class EmployeesController extends Controller
 
     }
 
-/*    public function edit()
-    {
-        $position = request('position');
-        $typeOfBus = request('typeOfBus');
-
-        if ($position == 1 || $position == 2 || $position == 3) {
-
-            $this->validate(request(), [
-                'maker' => 'required',
-                'model' => 'required',
-                'litresPerKilometer' => 'required',
-            ]);
-
-            DB::table('vehicles')->where('vid', request('vid'))->update([
-                'maker' => request('maker'),
-                'model' => request('model'),
-                'litresPerKilometer' => request('litresPerKilometer')
-            ]);
-
-        }
-        
-        if ($position == 1) {
-
-            $this->validate(request(), [
-                'seats' => 'required'
-            ]);
-
-            if ($typeOfBus != 'Tramvaj') {
-                $this->validate(request(), [
-                    'plateNumber' => 'required'
-                ]);
-                DB::table('vehicles')->where('vid', request('vid'))->update([
-                    'plateNumber' => request('plateNumber')
-                ]);
-            }
-
-            DB::table('buses')->where('vid', request('vid'))->update([
-                'seats' => request('seats')
-            ]);
-
-            return ['message' => 'Editing row in table for bus.', 'request' => request()->all()];
-
-        } else if ($position == 2) {
-
-            $this->validate(request(), [
-                'maxLoadKilos' => 'required',
-                'plateNumber' => 'required'
-            ]);
-
-            DB::table('vehicles')->where('vid', request('vid'))->update([
-                'plateNumber' => request('plateNumber')
-            ]);
-
-            DB::table('trucks')->where('vid', request('vid'))->update([
-                'maxLoadKilos' => request('maxLoadKilos')
-            ]);
-
-            return ['message' => 'Editing row in table for truck.', 'request' => request()->all()];
-
-        } else if ($position == 3) {
-
-            $this->validate(request(), [
-                'seats' => 'required',
-                'plateNumber' => 'required'
-            ]);
-
-            DB::table('vehicles')->where('vid', request('vid'))->update([
-                'plateNumber' => request('plateNumber')
-            ]);
-
-            DB::table('personal')->where('vid', request('vid'))->update([
-                'seats' => request('seats')
-            ]);
-
-            return ['message' => 'Editing row in table for personal.', 'request' => request()->all()];
-
-        } else {
-
-            return ['message' => 'Unknown type of vehicle.', 'request' => request()->all()];
-
-        }
-        
-    }*/
-
     public function search()
     {
         $position = request('selectedPosition');
@@ -275,107 +191,112 @@ class EmployeesController extends Controller
             return ['message' => 'Search request management', 'request' => request()->all(), 'response' => $management];
 
         } 
-        
+ 
     }
 
-/*    public function new()
+    public function new()
     {
-        $fdepots = DB::table('view_depots')->get();
-        return view('vehicles.new', compact('fdepots'));
-    }*/
+        return view('employees.new');
+    }
 
-/*    public function store()
+    public function createEmployee()
     {
+        $this->validate(request(), [
+            'position' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
 
-        if (request('selectedPosition') == 1) {
+            'dateHired' => 'required',
 
-            $this->validate(request(), [
-                'selectedPosition' => 'required',
-                'selectedDepot' => 'required',
-                'maker' => 'required',
-                'model' => 'required',
-                'plateNumber' => 'required',
-                'litresPerKilometer' => 'required',
-                'selectedTypeOfBus' => 'required',
-                'seats' => 'required'
-            ]);
+            'streetName' => 'required',
+            'houseNr' => 'required',
+            'city' => 'required',
+            'postalCode' => 'required'
+        ]);
 
-            $maker = request('maker');
-            $model = request('model');
-            $plateNumber = request('plateNumber');
-            $litresPerKilometer = request('litresPerKilometer');
-            $homeBranchId = request('selectedDepot');
-            $typeOfBus = request('selectedTypeOfBus');
-            $seats = request('seats');
-
-            $query = 'call new_bus(\'' . $maker . '\',\'' . $model . '\',\'' . $plateNumber . '\',' . $litresPerKilometer . ',' . $homeBranchId . ',\'' . $typeOfBus . '\',' . $seats . ')';
-
-            DB::select($query);
-
-            return ['message' => 'Bus added', 'data' => request()->all(), 'query' => $query];
-
-        } else if (request('selectedPosition') == 2) {
+        if (request('position') == 'Servis') {
 
             $this->validate(request(), [
-                'selectedPosition' => 'required',
-                'selectedDepot' => 'required',
-                'maker' => 'required',
-                'model' => 'required',
-                'plateNumber' => 'required',
-                'litresPerKilometer' => 'required',
-                'maxLoad' => 'required'
+                'hourlyWage' => 'required'
             ]);
 
-            $maker = request('maker');
-            $model = request('model');
-            $plateNumber = request('plateNumber');
-            $litresPerKilometer = request('litresPerKilometer');
-            $homeBranchId = request('selectedDepot');
-            $maxLoad = request('maxLoad');
-
-            $query = 'call new_truck(\'' . $maker . '\',\'' . $model . '\',\'' . $plateNumber . '\',' . $litresPerKilometer . ',' . $homeBranchId . ',' . $maxLoad . ')';
-
-            DB::select($query);
-
-            return ['message' => 'Truck added', 'data' => request()->all(), 'query' => $query];
-
-        } else if (request('selectedPosition') == 3) {
+        } else if (request('position') == 'Ridic') {
 
             $this->validate(request(), [
-                'selectedPosition' => 'required',
-                'selectedDepot' => 'required',
-                'maker' => 'required',
-                'model' => 'required',
-                'plateNumber' => 'required',
-                'litresPerKilometer' => 'required',
-                'seats' => 'required'
+                'hourlyWage' => 'required',
+                'lastTraining' => 'required'
             ]);
-
-            $maker = request('maker');
-            $model = request('model');
-            $plateNumber = request('plateNumber');
-            $litresPerKilometer = request('litresPerKilometer');
-            $homeBranchId = request('selectedDepot');
-            $seats = request('seats');
-
-            $query = 'call new_personal(\'' . $maker . '\',\'' . $model . '\',\'' . $plateNumber . '\',' . $litresPerKilometer . ',' . $homeBranchId . ',' . $seats . ')';
-
-            DB::select($query);
-
-            return ['message' => 'Personal vehicle added', 'request_data' => request()->all(), 'query' => $query];
 
         } else {
 
-            return ['message' => 'Unknown or not selected type of vehicle.', 'request_data' => request()->all()];
+            $this->validate(request(), [
+                'annualSalary' => 'required'
+            ]);
 
         }
 
-    }*/
+        $address_id = DB::table('addresses')->insertGetId([
+            'streetName' => request('streetName'),
+            'houseNr' => request('houseNr'),
+            'city' => request('city'),
+            'postalCode' => request('postalCode'),
+            'stateCODE' => 'CZ'
+        ]);
 
-/*    public function delete()
+        $employee_id = DB::table('employees')->insertGetId([
+            'firstName' => request('firstname'),
+            'lastName' => request('lastname'),
+            'position' => request('position'),
+            'addressID' => $address_id,
+            'dateHired' => \Carbon\Carbon::createFromFormat('d/m/Y', request('dateHired')), 
+        ]);
+
+        if (request('position') == 'Servis') {
+
+            DB::table('servicemen')->insert([
+                'EID' => $employee_id,
+                'hourlyWage' => request('hourlyWage')
+            ]);    
+
+        } else if (request('position') == 'Ridic') {
+
+            DB::table('drivers')->insert([
+                'EID' => $employee_id,
+                'hourlyWage' => request('hourlyWage'),
+                'lastTraining' => \Carbon\Carbon::createFromFormat('d/m/Y', request('lastTraining'))
+            ]);
+
+        } else {
+
+            DB::table('management')->insert([
+                'EID' => $employee_id,
+                'annualSalary' => request('annualSalary')
+            ]);
+
+        }
+
+        return ['message' => 'Create employee', 'request' => request()->all()];
+    }
+
+    public function deleteEmployee()
     {
-        DB::table('vehicles')->where('vid', request('vid'))->delete();
-        return ['Message' => 'Delete request', 'Request' => request('vid')];
-    }*/
+        DB::table('employees')->where('EID', request('employee_id'))->delete();
+
+        if (request('position') == 'Servis') {
+
+            DB::table('servicemen')->where('EID', request('employee_id'))->delete();  
+
+        } else if (request('position') == 'Ridic') {
+
+            DB::table('drivers')->where('EID', request('employee_id'))->delete();
+
+        } else {
+
+            DB::table('management')->where('EID', request('employee_id'))->delete();
+
+        }
+
+        return ['message' => 'Delete employee', 'request' => request()->all()];
+    }
 
 }

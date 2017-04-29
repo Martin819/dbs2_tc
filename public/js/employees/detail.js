@@ -71,6 +71,72 @@ var employee_detail = new Vue({
 			this.form.post('/employees/edit')
 				.then(data => console.log(data))
 				.catch(errors => console.log(errors));
+		},
+
+		deleteEmployee() {
+			axios.post('/employees/delete', {
+				employee_id: this.employee.EID,
+				position: this.employee.position
+			})
+			.then(response => this.onDeleteSuccess(response.data))
+			.catch(errors => this.onDeleteFail(errors));
+		},
+
+		onDeleteSuccess(data) {
+			console.log(data);
+			window.location.href = '/employees';
+		},
+
+		onDeleteFail(errors) {
+			console.log(errors);
+		}
+	}
+
+});
+
+var whourslog = new Vue({
+
+	el: '#workinglog',
+
+	data: {
+		workinghours: this.workinghours,
+		from: 0,
+		to: 0,
+		delta: 20
+
+	},
+
+	mounted() {
+		this.prepare();
+	},
+
+	computed: {
+		selectedlogs() {
+			return this.workinghours.slice(this.from, this.to);
+		},
+
+		selectionEnd() {
+			return this.workinghours.length > this.to ? this.to : this.workinghours.length;
+		}
+	},
+
+	methods: {
+		previous() {
+			this.from = this.from - this.delta;
+			this.to = this.to - this.delta;
+		},
+
+		next() {
+			this.from = this.from + this.delta;
+			this.to = this.to + this.delta;
+		},
+
+		prepare() {
+			if (this.workinghours.length > this.delta) {
+				this.to = this.delta;
+			} else {
+				this.to = this.workinghours.length;
+			}
 		}
 	}
 

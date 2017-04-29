@@ -99,6 +99,48 @@ var ci = new Vue({
 		isCompany() {
 			return this.form.typeOfCustomer == this.typesOfCustomers[2].text;
 		}
+	},
+
+	methods: {
+		showAddInvioceModal() {
+			$('#add_invoice_modal').modal('show');
+		}
+	}
+
+});
+
+var addinvoicemodal = new Vue({
+
+	el: '#add_invoice_form',
+
+	data: {
+
+		form: new Form({
+			customerID: this.customer[0].CID,
+			type: '',
+			startDest: '',
+			finalDest: '',
+			distance: '',
+			price: ''
+		})
+
+	},
+
+	methods: {
+		onSubmit() {
+			this.form.post('/customers/invoices/new')
+				.then(data => this.onSuccess(data))
+				.catch(errors => this.onFail(errors));
+		},
+
+		onSuccess(data) {
+			console.log(data);
+			window.location.href = '/customers/' + this.form.customerID;
+		},
+
+		onFail(errors) {
+			console.log(errors);
+		}
 	}
 
 });

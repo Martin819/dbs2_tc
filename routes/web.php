@@ -20,7 +20,8 @@ Route::get('/offices', 'BranchesController@create');
 Route::get('/employees', 'EmployeesController@create');
 Route::post('/employees', 'EmployeesController@search');
 Route::get('/employees/new', 'EmployeesController@new');
-Route::post('/employees/new', 'EmployeesController@store');
+Route::post('/employees/new', 'EmployeesController@createEmployee');
+Route::post('/employees/delete', 'EmployeesController@deleteEmployee');
 Route::post('/employees/edit', 'EmployeesController@edit');
 Route::get('/employees/{eid}', 'EmployeesController@detail');
 
