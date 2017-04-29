@@ -7,38 +7,37 @@ use Illuminate\Support\Facades\DB;
 
 class BranchesController extends Controller
 {
-	public function __construct()
-	{
-		$this->middleware('auth');	
-	}
-
-    public function create()
+    public function __construct()
     {
-/*    	$branches = DB::table('view_branches')->get();*/
-        return view('branches.index');
+        $this->middleware('auth');  
     }
 
-/*    public function detail($vid)
+public function create()
     {
-        $type = DB::table('vehicles')->where('VID', $vid)->value('type');
-        $journeylog = DB::table('view_journeylogs')->where('VID', $vid)->get();
+        $branches = DB::table('view_depots')->get();
+        return view('branches.index', compact('branches'));
+    }
+
+    public function detail($bid)
+    {
+        $type = DB::table('branches')->where('BID', $bid)->value('type');
         if ($type != null) {
             if ($type == 1) {
-                $vehicle = DB::table('view_buses')->where('VID', $vid)->get();
-                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog'));
+                $branches = DB::table('view_depots1')->where('BID', $bid)->get();
+                return view('branches.detail', compact('branches', 'type'));
             } else if ($type == 2) {
-                $vehicle = DB::table('view_trucks')->where('VID', $vid)->get();
-                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog'));
+                $branches = DB::table('view_offices')->where('BID', $bid)->get();
+                return view('branches.detail', compact('branches', 'type'));
             } else if ($type == 3) {
-                $vehicle = DB::table('view_personal')->where('VID', $vid)->get();
-                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog'));
+                $branches = DB::table('view_warehouses')->where('BID', $bid)->get();
+                return view('branches.detail', compact('branches', 'type'));
             } else {
-                return ['message' => 'Unknown type of vehicle.'];
+                return ['message' => 'Unknown type of branche.'];
             }
         } else {
-            return ['message' => 'Vehicle not found.'];
+            return ['message' => 'Branches not found.'];
         }
-    }*/
+    }
 
 /*    public function edit()
     {
@@ -126,27 +125,27 @@ class BranchesController extends Controller
 
     public function search()
     {
-        $typeOfBranche = request('selectedTypeOfBranche');
-        if ($typeOfBranche == "Depot") {
+        $typeOfBranches = request('selectedTypeOfBranches');
+        if ($typeOfBranches == "Depot") {
 
             $this->validate(request(), [
-                'selectedTypeOfBranche' => 'required'
+                'selectedTypeOfBranches' => 'required'
             ]);
             $depots = DB::table('view_depots')->get();
             return ['message' => 'Search request depots', 'request' => request()->all(), 'response' => $depots];
 
-        } else if ($typeOfBranche == "Office") {
+        } else if ($typeOfBranches == "Office") {
 
             $this->validate(request(), [
-                'selectedTypeOfBranche' => 'required'
+                'selectedTypeOfBranches' => 'required'
             ]);
             $offices = DB::table('view_offices')->get();
             return ['message' => 'Search request offices', 'request' => request()->all(), 'response' => $offices];
 
-        } else if ($typeOfBranche == "Warehouse") {
+        } else if ($typeOfBranches == "Warehouse") {
 
             $this->validate(request(), [
-                'selectedTypeOfBranche' => 'required'
+                'selectedTypeOfBranches' => 'required'
             ]);
             $warehouses = DB::table('view_warehouses')->get();
             return ['message' => 'Search request warehouses', 'request' => request()->all(), 'response' => $warehouses];

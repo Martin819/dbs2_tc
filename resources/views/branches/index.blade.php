@@ -12,13 +12,13 @@
   </div>
 
   <div class="jumbotron content_container">
-    <div class="container" id="search_branche">
+    <div class="container" id="search_branches">
 
       <div class="row" style="margin-left: 0px; margin-right: 0px;">
 
       <form class="form-inline" method="POST" action="/branches" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
         
-        <select class="form-control mb-2 mr-sm-2 mb-sm-0" v-model="form.selectedTypeOfBranche">
+        <select class="form-control mb-2 mr-sm-2 mb-sm-0" v-model="form.selectedTypeOfBranches">
           <option v-for="type in branchesType" v-bind:value="type.value" :disabled="type.isDisabled">
             @{{ type.text }}
           </option>
@@ -36,7 +36,7 @@
 
         </form> 
 
-        <a class="btn btn-warning ml-auto" href="/employees/new"><img src="img/add.png" style="width:24px;height:24px;"> Přidat novou pobocku</a>
+        <a class="btn btn-warning ml-auto" href="/branche/new"><img src="img/add.png" style="width:24px;height:24px;"> Přidat novou pobocku</a>
 
         </div>
 
