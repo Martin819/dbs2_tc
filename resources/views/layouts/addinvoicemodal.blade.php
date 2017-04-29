@@ -17,9 +17,12 @@
 
             <div class="modal-body">
               <div class="form-group">
-                  <label for="type">Typ:</label>
-                  <input type="text" class="form-control" id="type" name="type" v-model="form.type" placeholder="1 nebo 2" required>
-                  <span class="small text-danger" v-if="form.errors.has('type')" v-text="form.errors.get('type')"></span>
+                <label for="type">Typ zakázky:</label>
+                <select class="form-control" v-model="form.type" required>
+                  <option v-for="type in invoiceTypes" v-bind:value="type.value" :disabled="type.isDisabled">
+                    @{{ type.text }}
+                  </option>
+                </select>
               </div>
 
               <div class="form-group">
@@ -35,13 +38,13 @@
               </div>
 
               <div class="form-group">
-                  <label for="distance">Vzdálenost:</label>
-                  <input type="text" class="form-control" id="distance" name="distance" v-model="form.distance" placeholder="0 km" required>
+                  <label for="distance">Vzdálenost (km):</label>
+                  <input type="text" class="form-control" id="distance" name="distance" v-model="form.distance" placeholder="0" required>
                   <span class="small text-danger" v-if="form.errors.has('distance')" v-text="form.errors.get('distance')"></span>
               </div>
 
               <div class="form-group">
-                  <label for="price">Cena:</label>
+                  <label for="price">Cena (CZK):</label>
                   <input type="text" class="form-control" id="price" name="price" v-model="form.price" placeholder="0.00" required>
                   <span class="small text-danger" v-if="form.errors.has('price')" v-text="form.errors.get('price')"></span>
               </div>

@@ -40,7 +40,7 @@
 				<label for="depot">Depo:</label>
 				<select class="form-control" v-model="form.selectedDepot" :disabled="!isSelectedVehicleType()">
 				  <option v-for="depot in depots" v-bind:value="depot.BID">
-				  	@{{ getNameForDepot(depot.type) + ' ' + depot.address }}
+				  	@{{ depot.BID }}
 				  </option>
 				</select>
 			</div>
@@ -95,7 +95,7 @@
 
 @section('scripts')
 	<script type="text/javascript">
-		var fetchedDepots = {!! $fdepots !!};
+		var fetchedDepots = {!! $branches !!};
 	</script>
 	<script src="/js/vehicles/new.js"></script>
 @endsection

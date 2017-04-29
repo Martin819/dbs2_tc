@@ -44,11 +44,11 @@
 
 					<div class="col-md-12">
 						<div class="form-group">
-				  			<label for="vehicleType">Depo:</label>
-							<select class="form-control">
-							  <option>Centrala podniku</option>
-							  <option>Office park Future</option>
-							  <option>Tramvaj</option>
+				  			<label for="homeBranchID">Pobočka:</label>
+							<select class="form-control" v-model="form.homeBranchID">
+							  <option v-for="branch in branches" v-bind:value="branch.BID">
+							    @{{ branch.BID }}
+							  </option>
 							</select>
 					 	</div>
 					</div>
@@ -177,6 +177,7 @@
 		var vehicle = {!! $vehicle !!};
 		var type = {!! $type !!};
 		var journeylog = {!! $journeylog !!};
+		var branches = {!! $branches !!};
 	</script>
 	<script src="/js/vehicles/detail.js"></script>
 	<link href="/css/vehicle_detail.css" rel="stylesheet">

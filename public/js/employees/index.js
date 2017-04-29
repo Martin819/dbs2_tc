@@ -28,7 +28,7 @@ new Vue({
 			return this.isSelectedDriver() || this.isSelectedServiceman() || this.isSelectedManagement();
 		},
 		isSelectedDriver() {
-			return this.position == "Ridic"; 
+			return this.position == "Řidič(ka)"; 
 		},
 		isSelectedServiceman() {
 			return this.position == "Servis";

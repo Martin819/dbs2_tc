@@ -23,16 +23,18 @@ class EmployeesController extends Controller
         $position = DB::table('employees')->where('EID', $eid)->value('position');
         $workingHoursLogs = DB::table('view_workingHoursLogs')->where('EID', $eid)->get();
         $positions = DB::table('employees')->distinct()->orderBy('position')->get(['position']);
+        $branches = DB::table('branches')->get();
+        $branchID = DB::table('branches_employees')->where('employeeID', $eid)->get();
         if ($position != null) {
-            if ($position == 'Ridic') {
+            if ($position == 'Řidič(ka)') {
                 $employee = DB::table('view_drivers')->where('EID', $eid)->get();
-                return view('employees.detail', compact('employee', 'workingHoursLogs', 'positions'));
+                return view('employees.detail', compact('employee', 'workingHoursLogs', 'positions', 'branches', 'branchID'));
             } else if ($position == 'Servis') {
                 $employee = DB::table('view_servicemen')->where('EID', $eid)->get();
-                return view('employees.detail', compact('employee', 'workingHoursLogs', 'positions'));
+                return view('employees.detail', compact('employee', 'workingHoursLogs', 'positions', 'branches', 'branchID'));
             } else {
                 $employee = DB::table('view_management')->where('EID', $eid)->get();
-                return view('employees.detail', compact('employee', 'workingHoursLogs', 'positions'));
+                return view('employees.detail', compact('employee', 'workingHoursLogs', 'positions', 'branches', 'branchID'));
             } 
         } else {
             return ['message' => 'Employee not found.'];
@@ -77,7 +79,7 @@ class EmployeesController extends Controller
 
             echo "Ridic validovan";
 
-        } else if (request('position') == 'Ridic') {
+        } else if (request('position') == 'Řidič(ka)') {
 
             $this->validate(request(), [
                 'hourlyWage' => 'required',
@@ -108,7 +110,7 @@ class EmployeesController extends Controller
         if (request('position') != request('formerPosition')) {
             echo "Zmena pozice";
 
-            if (request('formerPosition') == 'Ridic') {
+            if (request('formerPosition') == 'Řidič(ka)') {
                 DB::table('drivers')->where('EID', request('eid'))->delete();
                 echo "Byval ridic";
             } else if (request('formerPosition') == 'Servis') {
@@ -125,7 +127,7 @@ class EmployeesController extends Controller
                     'hourlyWage' => request('hourlyWage')
                 ]);
                 echo "Uz je servisak";
-            } else if (request('position') == 'Ridic') {
+            } else if (request('position') == 'Řidič(ka)') {
                 DB::table('drivers')->insert([
                     'EID' => request('eid'),
                     'hourlyWage' => request('hourlyWage'),
@@ -145,7 +147,7 @@ class EmployeesController extends Controller
                     'hourlyWage' => request('hourlyWage')
                 ]);
                 echo "Upravena data servicemen";
-            } else if (request('position') == 'Ridic') {
+            } else if (request('position') == 'Řidič(ka)') {
                 DB::table('drivers')->where('EID', request('eid'))->update([
                     'hourlyWage' => request('hourlyWage'),
                     'lastTraining' => request('lastTraining')
@@ -159,6 +161,10 @@ class EmployeesController extends Controller
             } 
         }
 
+        DB::table('branches_employees')->where('employeeID', request('eid'))->update([
+            'branchID' => request('branchID')
+        ]);
+
         return ['Message' => 'Edit request', 'Request' => request()->all()];
 
     }
@@ -166,7 +172,7 @@ class EmployeesController extends Controller
     public function search()
     {
         $position = request('selectedPosition');
-        if ($position == "Ridic") {
+        if ($position == "Řidič(ka)") {
 
             $this->validate(request(), [
                 'selectedPosition' => 'required'
@@ -196,7 +202,8 @@ class EmployeesController extends Controller
 
     public function new()
     {
-        return view('employees.new');
+        $branches = DB::table('branches')->get();
+        return view('employees.new', compact('branches'));
     }
 
     public function createEmployee()
@@ -220,7 +227,7 @@ class EmployeesController extends Controller
                 'hourlyWage' => 'required'
             ]);
 
-        } else if (request('position') == 'Ridic') {
+        } else if (request('position') == 'Řidič(ka)') {
 
             $this->validate(request(), [
                 'hourlyWage' => 'required',
@@ -258,7 +265,7 @@ class EmployeesController extends Controller
                 'hourlyWage' => request('hourlyWage')
             ]);    
 
-        } else if (request('position') == 'Ridic') {
+        } else if (request('position') == 'Řidič(ka)') {
 
             DB::table('drivers')->insert([
                 'EID' => $employee_id,
@@ -286,7 +293,7 @@ class EmployeesController extends Controller
 
             DB::table('servicemen')->where('EID', request('employee_id'))->delete();  
 
-        } else if (request('position') == 'Ridic') {
+        } else if (request('position') == 'Řidič(ka)') {
 
             DB::table('drivers')->where('EID', request('employee_id'))->delete();
 

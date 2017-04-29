@@ -7,6 +7,8 @@ var vm = new Vue({
 		vehicleData: this.vehicle[0],
 		type: this.type,
 
+		branches: this.branches,
+
 		vehicleTypes: [
 		  { text: 'Vyberte typ vozidla' , value: '0', isDisabled: true },
 	      { text: 'Autobus', value: '1', isDisabled: false },
@@ -25,7 +27,8 @@ var vm = new Vue({
 	    	plateNumber: '',
 	    	litresPerKilometer: '',
 	    	seats: '',
-	    	maxLoadKilos: ''
+	    	maxLoadKilos: '',
+	    	homeBranchID: ''
 	    }),
 
 	    isLoading: false
@@ -57,6 +60,7 @@ var vm = new Vue({
 			this.form.litresPerKilometer = $vehicle.litresPerKilometer;
 			this.form.seats = $vehicle.seats;
 			this.form.maxLoadKilos = $vehicle.maxLoadKilos;
+			this.form.homeBranchID = $vehicle.homeBranchID;
 		},
 
 		onSubmit() {

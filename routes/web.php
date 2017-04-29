@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/offices', 'BranchesController@create');
+Route::get('/branches', 'BranchesController@create');
 
 Route::get('/employees', 'EmployeesController@create');
 Route::post('/employees', 'EmployeesController@search');
@@ -42,6 +42,7 @@ Route::post('/customers', 'CustomersController@search');
 Route::get('/customers/new', 'CustomersController@newCus');
 Route::post('/customers/new', 'CustomersController@newStore');
 Route::post('/customers/edit', 'CustomersController@edit');
+Route::post('/customers/delete', 'CustomersController@deleteCustomer');
 Route::post('/customers/invoices/new', 'CustomersController@newInvoice');
 
 Route::get('/customers/{cid}', 'CustomersController@detail');

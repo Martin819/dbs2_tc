@@ -19,7 +19,7 @@
 
 				<div class="row">
 							
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="form-group">
 				  			<label for="position">Pozice:</label>
 							<select class="form-control" v-model="form.position">
@@ -30,7 +30,18 @@
 					 	</div>
 					</div>
 
-					<div class="col-md-4">
+					<div class="col-md-3">
+						<div class="form-group">
+				  			<label for="branchID">Pobočka:</label>
+							<select class="form-control" v-model="form.branchID">
+							  <option v-for="branch in branches" v-bind:value="branch.BID">
+							    @{{ branch.BID }}
+							  </option>
+							</select>
+					 	</div>
+					</div>
+
+					<div class="col-md-3">
 						<div class="form-group">
 				  			<label for="firstname">Jméno:</label>
 						    <input type="text" class="form-control" id="firstname" name="firstname" v-model="form.firstname" required>
@@ -38,7 +49,7 @@
 					 	</div>
 					</div>
 
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="form-group">
 				  			<label for="lastname">Příjmení:</label>
 						    <input type="text" class="form-control" id="lastname" name="lastname" v-model="form.lastname" required>
@@ -134,5 +145,8 @@
 @endsection
 
 @section('scripts')
+	<script>
+		var branches = {!! $branches !!};
+	</script>
 	<script src="/js/employees/new.js"></script>
 @endsection

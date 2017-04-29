@@ -14,24 +14,25 @@ class VehiclesController extends Controller
 
     public function create()
     {
-    	$branches = DB::table('view_depots')->get();
-        return view('vehicles.index', compact('branches'));
+    	$fdepots = DB::table('branches')->get();
+        return view('vehicles.index', compact('fdepots'));
     }
 
     public function detail($vid)
     {
         $type = DB::table('vehicles')->where('VID', $vid)->value('type');
         $journeylog = DB::table('view_journeylogs')->where('VID', $vid)->get();
+        $branches = DB::table('branches')->get();
         if ($type != null) {
             if ($type == 1) {
                 $vehicle = DB::table('view_buses')->where('VID', $vid)->get();
-                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog'));
+                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog', 'branches'));
             } else if ($type == 2) {
                 $vehicle = DB::table('view_trucks')->where('VID', $vid)->get();
-                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog'));
+                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog', 'branches'));
             } else if ($type == 3) {
                 $vehicle = DB::table('view_personal')->where('VID', $vid)->get();
-                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog'));
+                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog', 'branches'));
             } else {
                 return ['message' => 'Unknown type of vehicle.'];
             }
@@ -56,7 +57,8 @@ class VehiclesController extends Controller
             DB::table('vehicles')->where('vid', request('vid'))->update([
                 'maker' => request('maker'),
                 'model' => request('model'),
-                'litresPerKilometer' => request('litresPerKilometer')
+                'litresPerKilometer' => request('litresPerKilometer'),
+                'homeBranchID' => request('homeBranchID')
             ]);
 
         }
@@ -168,8 +170,9 @@ class VehiclesController extends Controller
 
     public function new()
     {
-        $fdepots = DB::table('view_depots')->get();
-        return view('vehicles.new', compact('fdepots'));
+        // $fdepots = DB::table('view_depots')->get();
+        $branches = DB::table('branches')->get();
+        return view('vehicles.new', compact('branches'));
     }
 
     public function store()

@@ -84,7 +84,7 @@
 
 @section('scripts')
 	<script type="text/javascript">
-		var fetchedBranches = {!! $branches !!};
+		var fetchedBranches = {!! $fdepots !!};
 	</script>
 	<script src="/js/vehicles/index.js"></script>
 @endsection

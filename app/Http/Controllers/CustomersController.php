@@ -21,13 +21,14 @@ class CustomersController extends Controller
     {
         $customer = DB::table('view_customers')->where('CID', $cid)->get();
         $contracts = DB::table('contracts')->where('customerID', $cid)->get();
+        $branches = DB::table('branches')->get();
         $companyName = $customer[0]->companyName;
         if ($companyName == null) {
             $companyName = '\''. 'Fyzická osoba' . '\'';
         } else {
             $companyName = '\'' . 'Právnická osoba' . '\'';
         }
-        return view('customers.detail', compact('companyName', 'customer', 'contracts'));
+        return view('customers.detail', compact('companyName', 'customer', 'contracts', 'branches'));
     }
 
     public function search()
@@ -161,6 +162,12 @@ class CustomersController extends Controller
         ]);
 
         return ['Message' => 'Edit customer', 'Request' => request()->all()];
+    }
+
+    public function deleteCustomer()
+    {
+        DB::table('customers')->where('cid', request('customer_id'))->delete();
+        return ['message' => 'Delete employee', 'request' => request()->all()];
     }
 
     public function newInvoice()

@@ -25,6 +25,7 @@ class RegistrationController extends Controller
         $user->name = request()->input('name');
         $user->email = request()->input('email');
         $user->password = Hash::make(request()->input('password'));
+        $user->role = 1;
         $user->save();
 
         auth()->login($user);
@@ -36,7 +37,7 @@ class RegistrationController extends Controller
         return view('registration.createpass');
     }
 
-        public function storepass()
+    public function storepass()
     {
         $this->validate(request(), [
             'email' => 'required|email',

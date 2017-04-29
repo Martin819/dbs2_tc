@@ -53,7 +53,7 @@ var cd = new Vue({
 		},
 
 		fillForm() {
-			if (this.customer.companyName == '') {
+			if (!this.customer.companyName || this.customer.companyName == '') {
 				this.form.typeOfCustomer = this.typesOfCustomers[1].text;
 				this.form.firstname = this.customer.firstName;
 				this.form.lastname = this.customer.lastname;
@@ -73,6 +73,19 @@ var cd = new Vue({
 		printSth() {
 			console.log(this.customer);
 			console.log(this.contracts);
+		},
+
+		deleteCustomer() {
+			axios.post('/customers/delete', {
+				customer_id: this.form.cid
+			})
+			.then(response => this.onDeleteSuccess(response.data))
+			.catch(errors => console.log(errors));
+		},
+
+		onDeleteSuccess(data) {
+			console.log(data);
+			window.location.href = '/customers';
 		}
 	}
 
@@ -114,6 +127,11 @@ var addinvoicemodal = new Vue({
 	el: '#add_invoice_form',
 
 	data: {
+
+		invoiceTypes: [
+			{text: 'Nákladní', value: 1},
+			{text: 'Osobní', value: 2},
+		],
 
 		form: new Form({
 			customerID: this.customer[0].CID,

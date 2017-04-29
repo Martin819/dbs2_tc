@@ -11,13 +11,16 @@ var newemployee = new Vue({
 			'Poradce poradce ředitele', 
 			'Poradce ředitele', 
 			'Recepční',
-			'Ridic',
+			'Řidič(ka)',
 			'Servis',
 			'Výkonný ředitel'
 		],
 
+		branches: this.branches,
+
 		form: new Form({
 			position: '',
+			branchID: '',
 			firstname: '',
 			lastname: '',
 

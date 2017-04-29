@@ -6,6 +6,8 @@ var employee_detail = new Vue({
 		employee: this.employee[0],
 
 		employeePositions: this.positions,
+		branches: this.branches,
+		branchID: this.branchID[0].branchID,
 
 		form: new Form({
 			eid: '',
@@ -24,7 +26,9 @@ var employee_detail = new Vue({
 	    	city: '',
 	    	postalCode: '',
 
-	    	formerPosition: ''
+	    	formerPosition: '',
+
+	    	branchID: ''
 		})
 	},
 
@@ -51,6 +55,7 @@ var employee_detail = new Vue({
 			this.form.formerPosition = this.employee.position;
 
 			this.form.eid = this.employee.EID;
+			this.form.branchID = this.branchID;
 			this.form.position = this.employee.position;
 			this.form.firstname = this.employee.firstName;
 			this.form.lastname = this.employee.lastName;

@@ -1,4 +1,4 @@
-new Vue({
+var addveh = new Vue({
 
 	el: '#add_vehicle',
 
@@ -46,23 +46,19 @@ new Vue({
 		isSelectedPersonal() {
 			return this.form.selectedTypeOfVehicle == 3
 		},
-		getNameForDepot(type) {
-			if (type == 1) {
-				return 'Autobusové depo';
-			} else if (type == 2) {
-				return 'Depo pro nákladní vozy'; 
-			} else if (type == 3) {
-				return 'Depo pro osobní vozidla';
-			}
-		},
 		isSubmitDisabled() {
 			return !this.isSelectedVehicleType() || this.form.errors.any()
 		},
 
 		onSubmit() {
 			this.form.post('/vehicles/new')
-				.then(data => console.log(data))
+				.then(data => this.onSuccess(data))
 				.catch(errors => console.log(errors));
+		},
+
+		onSuccess(data) {
+			console.log(data);
+			window.location.href = '/vehicles';
 		}
 	}
 

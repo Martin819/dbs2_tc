@@ -101,7 +101,7 @@
 						<button type="submit" class="btn btn-primary">Uložit</button>
 					</div>
 
-					<a class="btn btn-danger ml-auto" href="#">Smazat zákazníka</a>
+					<button type="button" class="btn btn-danger ml-auto" @click="deleteCustomer()">Smazat zákazníka</button>
 					
 				</div>
 
