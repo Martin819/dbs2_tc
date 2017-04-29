@@ -29,6 +29,7 @@
 				 		<button type="submit" class="btn btn-primary">Přihlásit se</button>
 				 	</div>
 				 	<div class="form-group">
+				 		Ještě nemáte účet?</br> Klikněte zde pro jeho vytvoření: <a href="/register">Registrace</a>
 				 		@include('layouts.errors')
 				 	</div>
 			  	</form>
