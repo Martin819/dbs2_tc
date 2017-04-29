@@ -14,8 +14,6 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/branches', 'BranchesController@create');
-Route::post('/branches', 'BranchesController@search');
-Route::get('/branches/new', 'BranchesController@new');
 Route::get('/branches/{bid}', 'BranchesController@detail');
 
 Route::get('/employees', 'EmployeesController@create');

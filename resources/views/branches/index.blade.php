@@ -24,7 +24,7 @@
 					<tr v-for="office in offices">
 						<td v-text="office.name"></td>
 						<td v-text="getAddressFor(office)"></td>
-						<td><a class="btn btn-info" v-bind:href="'/offices/' + office.BID"> Detail</a></td>
+						<td><a class="btn btn-info" v-bind:href="'/branches/' + office.BID"> Detail</a></td>
 					</tr>
 				</tbody>
 			</table>	
@@ -47,7 +47,7 @@
 				<tbody>
 					<tr v-for="depot in depots">
 						<td v-text="getAddressFor(depot)"></td>
-						<td><a class="btn btn-info" v-bind:href="'/depots/' + depot.BID"> Detail</a></td>
+						<td><a class="btn btn-info" v-bind:href="'/branches/' + depot.BID"> Detail</a></td>
 					</tr>
 				</tbody>
 			</table>	
@@ -70,7 +70,7 @@
 				<tbody>
 					<tr v-for="warehouse in warehouses">
 						<td v-text="getAddressFor(warehouse)"></td>
-						<td><a class="btn btn-info" v-bind:href="'/warehouses/' + warehouse.BID"> Detail</a></td>
+						<td><a class="btn btn-info" v-bind:href="'/branches/' + warehouse.BID"> Detail</a></td>
 					</tr>
 				</tbody>
 			</table>	

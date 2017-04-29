@@ -1,121 +1,51 @@
-var vm = new Vue({
+var detail = new Vue({
 
-	el: '#branches_detail',
+	el: '#branch_detail',
 
 	data: {
-		
-		branches: this.branches,
-		branchID: this.branchID[0].branchID,
-		type: this.type,
-
-		branchesTypes: [
-		  { text: 'Vyberte typ pobocky' , value: '0', isDisabled: true },
-	      { text: 'Depot', value: '1', isDisabled: false },
-	      { text: 'Office', value: '2', isDisabled: false },
-	      { text: 'Warehouse', value: '3', isDisabled: false }
-	    ],
-
-	    branchesTypes: [ 'Depot', 'Office', 'Warehouse' ],
-
-		form: new Form({
-			bid: '',
-			typeOfBranches: '',
-	    	streetName: '',
-	    	houseNr: '',
-	    	city: '',
-	    	postalCode: '',
-
-	    	id:'',
-	    	firstName:'',
-	    	lastName:'',
-	    	position:'',
-	    	dateHired:'',
-
-	    	vid:'',
-	    	maker:'',
-	    	model:'',
-	    	plateNumber:'',
-	    	litresPerKilometer:'',
-
-	    	branchID:''
-	    }),
-
+		branch: this.branch[0],
+		departments: this.departments,
+		employees: this.employees,
+		vehicles: this.vehicles
 	},
 
 	computed: {
-
-		isDepot() {
-			return this.form.typeOfBranches == 1;
+		concatAddress() {
+			return this.branch.streetName + ' ' + this.branch.houseNr + ', ' + this.branch.city + ' ' + this.branch.postalCode 
 		},
 
-		isOffice() {
-			return this.form.typeOfBranches == 2;
+		concatDepartments() {
+			var string = '';
+			for (var i = 0; i < departments.length; i++) {
+				if (i > 0) {
+					string = string + ', ';
+				}
+				string = string + departments[i].name;
+			}
+			return string;
 		},
 
-		isWarehouse() {
-			return this.form.typeOfBranches == 3;
+		title() {
+			if (this.branch.type == 1) {
+				return this.branch.name;
+			} else if (this.branch.type == 2) {
+				return 'Skladiště';
+			} else {
+				return 'Depo';
+			}
 		}
 	},
 
 	methods: {
-
-		fillForm() {
-			this.form.typeOfBranches = this.type;
-			this.form.branchID = this.branchID;
-			this.form.streetName = this.branch.streetName;
-			this.form.houseNr = this.branch.houseNr;
-			this.form.city = this.branch.city;
-			this.form.postalCode= this.branch.postalCode;
-			this.form.stateCode=this.branch.stateCode;
-
-			this.form.id = this.employees.id;
-			this.form.firstName = this.employees.firstName;
-			this.form.lastName = this.employees.lastName;
-			this.form.position = this.employees.positon;
-			this.form.dateHired = this.employees.dateHired;
-
-			this.form.vid = this.vehicles.vid;
-			this.form.maker = this.vehicles.maker;
-			this.form.model = this.vehicles.model;
-			this.form.plateNumber = this.vehicles.plateNumber;
-			this.form.litresPerKilometer = this.vehicles.litresPerKilometer;
-
-		},
-
-		onSubmit() {
-			this.isLoading = true;
-			this.form.post('/branches/edit')
-				.then(data => this.onSuccess(data))
-				.catch(errors => this.onFail(errors));
-		},
-
-		onSuccess(data) {
-			this.isLoading = false;
-			alert('Pobocky upraveno.');
-			console.log(data);
-		},
-
-		onFail(errors) {
-			this.isLoading = false;
-			alert('POZOR: Všechna pole musí být vyplněna.');
-			console.log(errors);
-		},
-
-		del(){
-			axios.post('/branches/delete', {
-				'vid': this.form.vid
-			})
-			.then(function (response){
-				console.log(response);
-				window.location.href='/branches';
-			})
-			.catch(function(error){
-				console.log(error);
-			})
+		getTypeFor(vehicle) {
+			if (vehicle.type == 1) {
+				return 'Autobus';
+			} else if (vehicle.type == 2) {
+				return 'Nákladní vozidlo';
+			} else {
+				return 'Osobní vozidlo';
+			}
 		}
 	}
 
-
 });
-
-vm.fillForm();
