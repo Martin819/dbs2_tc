@@ -47,3 +47,10 @@ Route::post('/pass', 'RegistrationController@storepass');
 Route::get('/login', 'SessionsController@create')->name('login');
 Route::post('/login', 'SessionsController@store');
 Route::get('/logout', 'SessionsController@destroy');
+
+Route::get('/upload', function(){
+	return view('uploadFile/uploadFile');
+});
+Route::post('/busimages', function(){
+	request()->file('busimage')->store('busimages');
+});
