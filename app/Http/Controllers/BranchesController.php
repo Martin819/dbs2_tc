@@ -12,7 +12,7 @@ class BranchesController extends Controller
         $this->middleware('auth');  
     }
 
-public function create()
+    public function create()
     {
         $branches = DB::table('view_depots')->get();
         return view('branches.index', compact('branches'));
@@ -126,7 +126,7 @@ public function create()
     public function search()
     {
         $typeOfBranches = request('selectedTypeOfBranches');
-        if ($typeOfBranches == "Depot") {
+        if ($typeOfBranches == 1) {
 
             $this->validate(request(), [
                 'selectedTypeOfBranches' => 'required'
@@ -134,7 +134,7 @@ public function create()
             $depots = DB::table('view_depots')->get();
             return ['message' => 'Search request depots', 'request' => request()->all(), 'response' => $depots];
 
-        } else if ($typeOfBranches == "Office") {
+        } else if ($typeOfBranches == 2) {
 
             $this->validate(request(), [
                 'selectedTypeOfBranches' => 'required'
@@ -142,7 +142,7 @@ public function create()
             $offices = DB::table('view_offices')->get();
             return ['message' => 'Search request offices', 'request' => request()->all(), 'response' => $offices];
 
-        } else if ($typeOfBranches == "Warehouse") {
+        } else if ($typeOfBranches == 3) {
 
             $this->validate(request(), [
                 'selectedTypeOfBranches' => 'required'
@@ -157,7 +157,7 @@ public function create()
             ]);
             $otherEmployees = DB::table('view_otherEmployees')->get();
             return ['message' => 'Search request otherEmployees', 'request' => request()->all(), 'response' => $otherEmployees];*/
-            return ['message' => 'Unknown position.'];
+            return ['message' => 'Unknown type of branch.', 'request' => request()->all()];
         }
         
     }

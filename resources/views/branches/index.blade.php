@@ -18,7 +18,7 @@
 
       <form class="form-inline" method="POST" action="/branches" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
         
-        <select class="form-control mb-2 mr-sm-2 mb-sm-0" v-model="form.selectedTypeOfBranches">
+        <select class="form-control mb-2 mr-sm-2 mb-sm-0" v-model="typeOfBranches">
           <option v-for="type in branchesType" v-bind:value="type.value" :disabled="type.isDisabled">
             @{{ type.text }}
           </option>
@@ -32,7 +32,7 @@
 </select>
 </transition> -->
 
-        <button type="submit" class="btn btn-primary mb-2 mr-sm-2 mb-sm-0" :disabled="isSubmitDisabled()"><img src="img/search.png" style="width:24px;height:24px;"> Hledat</button>
+        <button type="submit" class="btn btn-primary mb-2 mr-sm-2 mb-sm-0"><img src="img/search.png" style="width:24px;height:24px;"> Hledat</button>
 
         </form> 
 
@@ -40,8 +40,15 @@
 
         </div>
 
-        <transition name="fade">
-        
+        <transition name="fade" v-if="isTableVisible()">
+        <table class="table table-hover borderless" style="margin-top: 30px;">
+          <thead><th>Adresa</th></thead>
+          <tbody>
+            <tr v-for="branch in fetchedBranches">
+              <td v-text="branch.streetName + ' ' + branch.houseNr"></td>
+            </tr>
+          </tbody>
+        </table>
         </transition>
 
         <transition name="fade">

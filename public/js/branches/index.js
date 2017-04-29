@@ -18,7 +18,7 @@ new Vue({
 	    	selectedTypeOfBranches: '0',
 	    }),
 
-	    typeOfBranches: "",
+	    typeOfBranches: '',
 	    fetchedBranches: [],
 	    isLoading: false
 	},
@@ -61,7 +61,7 @@ new Vue({
 
 		onSubmit() {
 			this.isLoading = true;
-			this.position = this.form.selectedTypeOfBranche;
+			this.form.selectedTypeOfBranches = this.typeOfBranches;
 			this.form.post('/branches')
 				.then(data => this.fillBranchesArray(data))
 				.catch(errors => console.log(errors));
