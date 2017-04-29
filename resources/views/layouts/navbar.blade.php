@@ -11,7 +11,7 @@
 
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/offices">Pobočky</a>
+          <a class="nav-link" href="/branches">Pobočky</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/employees">Zaměstnanci</a>
