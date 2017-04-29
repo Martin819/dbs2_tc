@@ -18,7 +18,7 @@
 				<tbody>
 					<tr><th>ID:</th><td v-text="branch.BID"></td></tr>
 					<tr><th>Adresa:</th><td v-text="concatAddress"></td></tr>
-					<tr><th>Oddělení:</th><td v-text="concatDepartments"></td></tr>
+					<tr v-if="branch.type==1"><th>Oddělení:</th><td v-text="concatDepartments"></td></tr>
 				</tbody>
 			</table>
 	    </div>
@@ -35,11 +35,13 @@
 	    	<table class="table table-hover borderless" v-if="employees.length > 0">
 	    		<thead>
 	    			<th>Jméno</th>
+	    			<th>Pozice</th>
 	    			<th style="width:1%;"></th>
 	    		</thead>
 	    		<tbody>
 	    			<tr v-for="employee in employees">
 	    				<td v-text="employee.firstName + ' ' + employee.lastName"></td>
+	    				<td v-text="employee.position"></td>
 	    				<td><a class="btn btn-info" v-bind:href="'/employees/' + employee.EID">Detail</a></td>
 	    			</tr>
 	    		</tbody>
