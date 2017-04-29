@@ -10,21 +10,27 @@
     @if(Auth::check())
 
       <ul class="navbar-nav mr-auto">
+        @if(Auth::user()->role >= 5)
         <li class="nav-item">
           <a class="nav-link" href="/branches">Pobočky</a>
         </li>
+        @endif
+        @if(Auth::user()->role >= 10)
         <li class="nav-item">
           <a class="nav-link" href="/employees">Zaměstnanci</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/vehicles">Vozidla</a>
         </li>
+        @endif
         <li class="nav-item">
           <a class="nav-link" href="/timetables">Jízdní řády</a>
         </li>
+        @if(Auth::user()->role >= 10)
         <li class="nav-item">
           <a class="nav-link" href="/customers">Zákazníci</a>
         </li>
+        @endif
       </ul>
 
       <div class="ml-auto">
