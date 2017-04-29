@@ -1,6 +1,6 @@
 new Vue({
 
-	el: '#search_branche',
+	el: '#search_branches',
 
 	data: {
 
@@ -15,26 +15,26 @@ new Vue({
 	    ],
 
 	    form: new Form({
-	    	selectedTypeOfBranche: '0',
+	    	selectedTypeOfBranches: '0',
 	    }),
 
-	    typeOfBranche: "",
+	    typeOfBranches: "",
 	    fetchedBranches: [],
 	    isLoading: false
 	},
 
 	methods: {
-		isSelectedTypeOfBranche() {
-			return this.form.selectedTypeOfBranche > 0;
+		isSelectedTypeOfBranches() {
+			return this.form.selectedTypeOfBranches > 0;
 		},
 		isSelectedDepot() {
-			return this.typeOfBranche == "Depo";
+			return this.typeOfBranches == "Depo";
 		},
 		isSelectedOffice() {
-			return this.typeOfBranche == "Kancelář";
+			return this.typeOfBranches == "Kancelář";
 		},
 		isSelectedWarehouse() {
-			return this.typeOfBranche == "Sklad";
+			return this.typeOfBranches == "Sklad";
 		},
 /*		isSelectedTram() {
 			return this.position == 1 && this.typeOfBus == 'Tramvaj';
@@ -49,7 +49,7 @@ new Vue({
 			}
 		},*/
 		isSubmitDisabled() {
-			return !this.isSelectedTypeOfBranche() || this.form.errors.any()
+			return !this.isSelectedTypeOfBranches() || this.form.errors.any()
 		},
 		isTableVisible() {
 			if (this.isLoading) {
