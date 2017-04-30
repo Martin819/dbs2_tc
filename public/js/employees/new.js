@@ -39,7 +39,7 @@ var newemployee = new Vue({
 
 	computed: {
 		isDriver() {
-			return this.form.position == 'Ridic';
+			return this.form.position == 'Řidič(ka)';
 		},
 
 		isServiceman() {

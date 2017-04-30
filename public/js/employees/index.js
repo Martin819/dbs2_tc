@@ -15,7 +15,7 @@ new Vue({
 		employeePositions: this.positions,
 
 	    form: new Form({
-	    	selectedPosition: '0',
+	    	selectedPosition: '',
 	    }),
 
 	    position: '',

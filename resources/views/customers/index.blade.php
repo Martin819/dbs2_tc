@@ -40,7 +40,7 @@
 				<input type="text" class="form-control" id="companyIdentNr" name="companyIdentNr" v-model="form.companyIdentNr" placeholder="ID firmy">
 				</div>
 
-			  <button type="submit" class="btn btn-primary mb-2 mr-sm-2 mb-sm-0">Hledat</button>
+			  <button type="submit" class="btn btn-primary mb-2 mr-sm-2 mb-sm-0" :disabled="form.typeOfCustomer == 'Vyberte typ zákazníka'">Hledat</button>
 
 	  		</form>	
 

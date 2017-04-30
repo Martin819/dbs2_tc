@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
 @section('title')
-  Zamestnanci
+  Zaměstnanci
 @endsection
 
 @section('content')
   <div class="jumbotron">
     <div class="container">
-      <h1 class="display-3">Zamestnanci</h1>
+      <h1 class="display-3">Zaměstnanci</h1>
     </div>
   </div>
 
@@ -32,7 +32,7 @@
 </select>
 </transition> -->
 
-        <button type="submit" class="btn btn-primary mb-2 mr-sm-2 mb-sm-0"><img src="img/search.png" style="width:24px;height:24px;"> Hledat</button>
+        <button type="submit" class="btn btn-primary mb-2 mr-sm-2 mb-sm-0" :disabled="!form.selectedPosition"><img src="img/search.png" style="width:24px;height:24px;"> Hledat</button>
 
         </form> 
 
