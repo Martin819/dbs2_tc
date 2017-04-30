@@ -19,15 +19,7 @@
 				</div>
 			</div>
 
-			<div class="row" style="margin-bottom: 30px;">
-				<div class="col-md-12">
-					<form method="POST" enctype="multipart/form-data" @submit.prevent="onUpload">
-						{{ csrf_field() }}
-						<input type="file" name="busimage" id="busimage"></input>
-						<button type="submit" class="btn btn-primary">Nahrát</button>
-					</form>
-				</div>
-			</div>
+
 
 			<form method="POST" action="/vehicles/edit" @submit.prevent="onSubmit">
 				<div class="row">
@@ -138,6 +130,17 @@
 					<a class="btn btn-danger ml-auto" href="#" v-on:click="del()"><img src="../img/delete.png" style="width:24px;height:24px;"> Smazat</a>
 				</div>
 			</form>	
+			</br></br>
+			<div class="row" style="margin-bottom: 30px;">
+				<div class="col-md-12">
+					<form method="POST" enctype="multipart/form-data" @submit.prevent="onUpload">
+						{{ csrf_field() }}
+						<label for="busimage">Nahrát obrázek:</label></br>
+						<input type="file" name="busimage" id="busimage"></input>
+						<button type="submit" class="btn btn-primary">Nahrát</button>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 
