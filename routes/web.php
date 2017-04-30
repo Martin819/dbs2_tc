@@ -30,6 +30,9 @@ Route::post('/vehicles/new', 'VehiclesController@store');
 Route::get('/vehicles/{vid}', 'VehiclesController@detail');
 Route::post('/vehicles/edit', 'VehiclesController@edit');
 Route::post('/vehicles/delete', 'VehiclesController@delete');
+Route::post('/vehicles/uploadImage', 'VehiclesController@uploadImage');
+Route::post('/vehicles/getImage', 'VehiclesController@getImage');
+
 Route::get('/timetables', 'TimetablesController@create');
 Route::get('/timetables/{lid}', 'TimetablesController@detail');
 Route::get('/customers', 'CustomersController@create');

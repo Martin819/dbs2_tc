@@ -13,6 +13,22 @@
 
 	<div class="jumbotron content_container" id="vehicle_detail">
 		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<img id="obraz">
+				</div>
+			</div>
+
+			<div class="row" style="margin-bottom: 30px;">
+				<div class="col-md-12">
+					<form method="POST" enctype="multipart/form-data" @submit.prevent="onUpload">
+						{{ csrf_field() }}
+						<input type="file" name="busimage" id="busimage"></input>
+						<button type="submit" class="btn btn-primary">Nahrát</button>
+					</form>
+				</div>
+			</div>
+
 			<form method="POST" action="/vehicles/edit" @submit.prevent="onSubmit">
 				<div class="row">
 							
@@ -178,6 +194,7 @@
 		var type = {!! $type !!};
 		var journeylog = {!! $journeylog !!};
 		var branches = {!! $branches !!};
+		var imgbase64 = {!! $imgbase64 !!};
 	</script>
 	<script src="/js/vehicles/detail.js"></script>
 	<link href="/css/vehicle_detail.css" rel="stylesheet">

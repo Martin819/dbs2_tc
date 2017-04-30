@@ -3,6 +3,8 @@ var vm = new Vue({
 	el: '#vehicle_detail',
 
 	data: {
+
+		image: 'Ahoj',
 		
 		vehicleData: this.vehicle[0],
 		type: this.type,
@@ -35,7 +37,43 @@ var vm = new Vue({
 
 	},
 
+	mounted() {
+
+		this.image = this.imgbase64;
+		this.fillForm();
+		this.fetchImage();
+
+	},
+
 	methods: {
+
+		fetchImage() {
+			axios.post('/vehicles/getImage', {
+				vid: this.form.vid
+			})
+			.then(response => this.onFetchImageSuccess(response.data))
+			.catch(errors => console.log(errors));
+		},
+
+		onFetchImageSuccess(data) {
+			console.log(data);
+			//this.image = data.image.data;
+
+			if (!data.has) {
+				return
+			}
+
+			var obraz = new Image();
+			obraz.id = "obraz";
+			obraz.src = 'data:image/png;base64,' + data.image.data;
+			obraz.style.width = "200px";
+			obraz.style.margin = "0 0 20px 0";
+
+
+			// document.getElementById("obraz") = obrz;
+			var puvodni = document.getElementById("obraz");
+			puvodni.parentNode.replaceChild(obraz, puvodni);
+		},
 
 		isBus() {
 			return this.form.typeOfVehicle == 1;
@@ -93,13 +131,31 @@ var vm = new Vue({
 			.catch(function(error){
 				console.log(error);
 			})
+		},
+
+		onUpload() {
+			console.log('onUpload');
+			var form = document.querySelector('#busimage');
+			var image = form.files[0];
+			console.log(image);
+
+			let data = new FormData();
+    		data.append('img', image);
+    		data.append('vid', this.form.vid);
+
+			axios.post('/vehicles/uploadImage', data)
+			.then(response => this.onUploadSuccess(response.data))
+			.catch(errors => console.log(errors));
+		},
+
+		onUploadSuccess(data) {
+			console.log(data);
+			this.fetchImage();
 		}
 	}
 
 
 });
-
-vm.fillForm();
 
 var jlogdiv = new Vue({
 

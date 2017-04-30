@@ -23,10 +23,11 @@ class VehiclesController extends Controller
         $type = DB::table('vehicles')->where('VID', $vid)->value('type');
         $journeylog = DB::table('view_journeylogs')->where('VID', $vid)->get();
         $branches = DB::table('branches')->get();
+        $imgbase64 = DB::table('busimagesbinary')->where('title', $vid)->get();
         if ($type != null) {
             if ($type == 1) {
                 $vehicle = DB::table('view_buses')->where('VID', $vid)->get();
-                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog', 'branches'));
+                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog', 'branches', 'imgbase64'));
             } else if ($type == 2) {
                 $vehicle = DB::table('view_trucks')->where('VID', $vid)->get();
                 return view('vehicles.detail', compact('vehicle', 'type', 'journeylog', 'branches'));
@@ -267,6 +268,35 @@ class VehiclesController extends Controller
     {
         DB::table('vehicles')->where('vid', request('vid'))->delete();
         return ['Message' => 'Delete request', 'Request' => request('vid')];
+    }
+
+    public function uploadImage()
+    {
+        $file = 'nemam';
+        if (request()->hasFile('img')) {
+            $file = 'mam';
+            if (request()->file('img')->isValid()) {
+                $file = 'validni';
+                DB::table('busimagesbinary')->where('title', request('vid'))->delete();
+                $file = base64_encode(file_get_contents(request()->file('img')));
+                DB::table('busimagesbinary')->insert([
+                    'title' => request('vid'),
+                    'data' => $file
+                ]);
+            }
+        }
+        return ['message' => 'upload image', 'request' => request()->all()];
+    }
+
+    public function getImage()
+    {
+        $imgbase64 = DB::table('busimagesbinary')->where('title', request('vid'))->get();
+        $has = 0;
+        if (count($imgbase64) > 0) {
+            $imgbase64 = $imgbase64[0];
+            $has = 1;
+        }
+        return ['message' => 'get image', 'image' => $imgbase64, 'request' => request()->all(), 'has' => $has];
     }
 
 }
