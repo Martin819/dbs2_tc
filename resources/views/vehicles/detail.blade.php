@@ -197,7 +197,7 @@
 		var type = {!! $type !!};
 		var journeylog = {!! $journeylog !!};
 		var branches = {!! $branches !!};
-		var imgbase64 = {!! $imgbase64 !!};
+		
 	</script>
 	<script src="/js/vehicles/detail.js"></script>
 	<link href="/css/vehicle_detail.css" rel="stylesheet">

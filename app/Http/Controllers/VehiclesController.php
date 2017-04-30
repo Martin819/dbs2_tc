@@ -23,11 +23,10 @@ class VehiclesController extends Controller
         $type = DB::table('vehicles')->where('VID', $vid)->value('type');
         $journeylog = DB::table('view_journeylogs')->where('VID', $vid)->get();
         $branches = DB::table('branches')->get();
-        $imgbase64 = DB::table('busimagesbinary')->where('title', $vid)->get();
         if ($type != null) {
             if ($type == 1) {
                 $vehicle = DB::table('view_buses')->where('VID', $vid)->get();
-                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog', 'branches', 'imgbase64'));
+                return view('vehicles.detail', compact('vehicle', 'type', 'journeylog', 'branches'));
             } else if ($type == 2) {
                 $vehicle = DB::table('view_trucks')->where('VID', $vid)->get();
                 return view('vehicles.detail', compact('vehicle', 'type', 'journeylog', 'branches'));
